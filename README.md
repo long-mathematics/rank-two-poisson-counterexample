@@ -11,8 +11,8 @@ Christopher D. Long
 This companion repository contains the manuscript, exact computational checks,
 and the Lean formalization of the main counterexample over ℚ, ℂ, and
 arbitrary characteristic-zero fields. **Full-paper coverage is still in progress.**
-The determinant/symplectic consequences, exhaustive fiber, higher-rank extension,
-and Weyl appendix are separate obligations in the
+The exact three-point fiber is proved. The determinant/symplectic consequences,
+higher-rank extension, and Weyl appendix remain obligations in the
 [coverage ledger](FORMALIZATION_STATUS.md).
 
 ## Abstract
@@ -140,10 +140,13 @@ The exported statements are `RankTwoPoisson.explicit_counterexample`,
 `RankTwoPoisson.explicit_counterexample_complex`, and
 `RankTwoPoisson.explicit_counterexample_charZero K` (only `[Field K] [CharZero K]`).
 They prove bracket preservation for every pair of polynomials and nonautomorphism
-of the substitution algebra map. The proof uses an explicit point collision;
-it does not claim that the entire three-point fiber has been classified in Lean.
+of the substitution algebra map. The nonautomorphism proof uses an explicit point collision.
+`RankTwoPoisson.Fiber.exact_fiber_complex` additionally proves that every point
+in the specified fiber is one of the three displayed points. Rational and general
+characteristic-zero versions and pairwise distinctness are proved too. The
+separate Gröbner-basis/scheme certificate remains an obligation.
 
-[Lean CI](.github/workflows/lean-ci.yml) builds all seven mathematical modules
+[Lean CI](.github/workflows/lean-ci.yml) builds all eight mathematical modules
 through the default root library. It checks source escapes, import closure,
 the named-result ledger, and transitive axiom dependencies of every declaration
 originating in a project module, including private/generated constants. Only

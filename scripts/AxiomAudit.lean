@@ -44,3 +44,7 @@ run_cmd do
 #print axioms RankTwoPoisson.SourceCoordinates.two_sided_inverse_certificate
 #print axioms RankTwoPoisson.Core.coefficient_identity
 #print axioms RankTwoPoisson.Core.core_jacobian
+
+#print axioms RankTwoPoisson.Fiber.exact_fiber_charZero
+#print axioms RankTwoPoisson.Fiber.exact_fiber_complex
+#print axioms RankTwoPoisson.Fiber.exact_fiber_rational
