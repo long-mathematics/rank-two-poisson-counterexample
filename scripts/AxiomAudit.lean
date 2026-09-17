@@ -56,3 +56,11 @@ run_cmd do
 
 #print axioms RankTwoPoisson.Core.core_det_charZero
 #print axioms RankTwoPoisson.Core.coefficient_identity_matrix
+
+#print axioms RankTwoPoisson.SourceCoordinates.sourceEquivK
+#print axioms RankTwoPoisson.SourceCoordinates.correctedEquivK
+#print axioms RankTwoPoisson.SourceCoordinates.source_algebraicIndependent
+#print axioms RankTwoPoisson.SourceCoordinates.source_det_charZero
+#print axioms RankTwoPoisson.SourceCoordinates.corrected_det_charZero
+#print axioms RankTwoPoisson.Calculus.jacobi
+#print axioms RankTwoPoisson.Calculus.hamiltonian_commutator

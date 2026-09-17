@@ -16,10 +16,12 @@ The exact claim/hypothesis/dependency/status ledger is
 | `RankTwoPoisson/CharacteristicZero.lean` | Same extension for every field K of characteristic zero, without further hypotheses |
 | `RankTwoPoisson/ExactFiber.lean` | Exhaustive three-point fiber over Q/C/K, pairwise distinctness, localized formulas, source-coordinate recovery and H-values |
 | `RankTwoPoisson/Symplectic.lean` | General symplectic criterion, actual 4×4 Jacobian and form preservation, bundled main theorem |
+| `RankTwoPoisson/SourceEquivalence.lean` | Actual source and corrected algebra equivalences over K, explicit inverses, core substitution, algebraic independence, and source Jacobians |
+| `RankTwoPoisson/PoissonCalculus.lean` | Mixed partials, Jacobi identity, and Hamiltonian derivation commutators |
 | `RankTwoPoisson/CoreGeometry.lean` | Actual 3×3 core Jacobian over Q/K and complete residual form coefficient matrix |
 
-The umbrella imports every mathematical layer, including `Symplectic` and
-`CoreGeometry`. The counterexample chain runs through `CharacteristicZero` and
+The umbrella imports every mathematical layer, including the source-equivalence and
+Poisson-calculus modules. The counterexample chain runs through `CharacteristicZero` and
 `Complex` to `Collision`, `Poisson`, `Core`, `SourceCoordinates`, and `Definitions`. This transitive
 closure is checked by `scripts/audit_sources.py`, and the root Lake library is
 the default build target. Auxiliary Lean audits live under `scripts/` and run
@@ -43,3 +45,12 @@ The matrix Ω represents dx∧dp+dq∧dz, its inverse −Ω is the bracket matri
 proved 4×4 contraction formula establishes determinant +1. `CoreGeometry`
 identifies the old expanded core determinant with Matrix.det and transports it
 coefficientwise. Higher ranks and the Weyl appendix remain open.
+
+The source coordinate automorphisms are represented contravariantly by
+substitution algebra equivalences. Their inverse generator images are the
+paper’s explicit inverse formulas. The corrected equivalence composes the
+uncorrected one with the independent-coordinate shear, whose inverse subtracts
+H. Both full source Jacobians are differentiated directly and coefficientwise
+transported to K, giving the same determinant −1 as the triangular argument.
+`PoissonCalculus` supplies Jacobi and equality of Hamiltonian commutators as
+actual derivations; these results alone do not construct a Weyl endomorphism.

@@ -1,4 +1,4 @@
-Axiom audit passed: 11 modules, 379 declarations, 274 theorem constants.
+Axiom audit passed: 13 modules, 450 declarations, 329 theorem constants.
 All transitive dependencies lie in {propext, Classical.choice, Quot.sound}.
 'RankTwoPoisson.explicit_counterexample' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RankTwoPoisson.explicit_counterexample_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -17,3 +17,12 @@ All transitive dependencies lie in {propext, Classical.choice, Quot.sound}.
 'RankTwoPoisson.Symplectic.main_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RankTwoPoisson.Core.core_det_charZero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RankTwoPoisson.Core.coefficient_identity_matrix' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.SourceCoordinates.sourceEquivK' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.SourceCoordinates.correctedEquivK' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.SourceCoordinates.source_algebraicIndependent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RankTwoPoisson.SourceCoordinates.source_det_charZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.SourceCoordinates.corrected_det_charZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Calculus.jacobi' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Calculus.hamiltonian_commutator' depends on axioms: [propext, Classical.choice, Quot.sound]

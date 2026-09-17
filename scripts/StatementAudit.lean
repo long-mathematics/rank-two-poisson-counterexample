@@ -41,3 +41,15 @@ This supplements the whole-module axiom audit; it adds no mathematical facts. -/
 
 #check RankTwoPoisson.Core.core_det_charZero
 #check RankTwoPoisson.Core.coefficient_identity_matrix
+
+#check RankTwoPoisson.SourceCoordinates.sourceEquivK
+#check RankTwoPoisson.SourceCoordinates.sourceEquivK_X
+#check RankTwoPoisson.SourceCoordinates.sourceEquivK_symm_X
+#check RankTwoPoisson.SourceCoordinates.correctedEquivK_X
+#check RankTwoPoisson.SourceCoordinates.correctedEquivK_symm_X
+#check RankTwoPoisson.SourceCoordinates.source_algebraicIndependent
+#check RankTwoPoisson.SourceCoordinates.core_substitution_charZero
+#check RankTwoPoisson.SourceCoordinates.source_det_charZero
+#check RankTwoPoisson.SourceCoordinates.corrected_det_charZero
+#check RankTwoPoisson.Calculus.jacobi
+#check RankTwoPoisson.Calculus.hamiltonian_commutator
