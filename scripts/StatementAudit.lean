@@ -64,3 +64,13 @@ This supplements the whole-module axiom audit; it adds no mathematical facts. -/
 #check RankTwoPoisson.Core.DerivativeCertificate.h_derivatives
 #check RankTwoPoisson.Core.DerivativeCertificate.expanded_coefficients
 #check RankTwoPoisson.SourceCoordinates.Forms.omega_split_charZero
+
+#check RankTwoPoisson.HigherRank.canonical_px
+#check RankTwoPoisson.HigherRank.reindex_bracket
+#check RankTwoPoisson.HigherRank.standardPhi_X
+#check RankTwoPoisson.HigherRank.standardPhi_X_extra
+#check RankTwoPoisson.HigherRank.standardPhi_preserves
+#check RankTwoPoisson.HigherRank.standardPhi_not_surjective
+#check RankTwoPoisson.HigherRank.every_rank
+#check RankTwoPoisson.HigherRank.base_not_surjective
+#check RankTwoPoisson.HigherRank.every_rank ℂ

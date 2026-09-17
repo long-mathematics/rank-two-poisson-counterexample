@@ -1,4 +1,4 @@
-Axiom audit passed: 16 modules, 533 declarations, 399 theorem constants.
+Axiom audit passed: 17 modules, 606 declarations, 458 theorem constants.
 All transitive dependencies lie in {propext, Classical.choice, Quot.sound}.
 'RankTwoPoisson.explicit_counterexample' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RankTwoPoisson.explicit_counterexample_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -38,3 +38,11 @@ All transitive dependencies lie in {propext, Classical.choice, Quot.sound}.
  Classical.choice,
  Quot.sound]
 'RankTwoPoisson.SourceCoordinates.Forms.omega_split_charZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.HigherRank.canonical_px' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.HigherRank.reindex_bracket' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.HigherRank.standardPhi_X' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.HigherRank.standardPhi_X_extra' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.HigherRank.standardPhi_preserves' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.HigherRank.standardPhi_not_surjective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.HigherRank.every_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.HigherRank.base_not_surjective' depends on axioms: [propext, Classical.choice, Quot.sound]

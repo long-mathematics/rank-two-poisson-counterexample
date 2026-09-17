@@ -11,8 +11,9 @@ Christopher D. Long
 This companion repository contains the manuscript, exact computational checks,
 and a Lean proof of every conclusion of the main theorem, with rational and
 arbitrary-characteristic-zero versions of its counterexample. **Full-paper coverage is still in progress.**
-The exact fiber, Jacobian determinant and symplectic preservation are proved.
-The higher-rank extension, Weyl appendix, and remaining support claims are in the
+The exact fiber, Jacobian determinant, symplectic preservation, and extension
+to every higher Poisson rank are proved. The Weyl appendix and remaining
+support claims are tracked in the
 [coverage ledger](FORMALIZATION_STATUS.md).
 
 ## Abstract
@@ -157,6 +158,10 @@ Jacobians, algebraic independence of x,y,β, and the Jacobi and Hamiltonian
 commutator laws are also proved over the indicated coefficient fields. The
 induced core bracket, source differential-form calculation, and Appendix A
 derivative certificates are formalized.
+
+`RankTwoPoisson.HigherRank.every_rank` proves non-surjective canonical Poisson
+endomorphisms for every n≥2 over every characteristic-zero field, including C.
+The standard n-pair bracket and exact generator reindexing are explicit.
 
 [Lean CI](.github/workflows/lean-ci.yml) builds all mathematical modules
 through the default root library. It checks source escapes, import closure,
