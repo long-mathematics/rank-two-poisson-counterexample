@@ -12,3 +12,7 @@ build/
 *.out
 *.synctex.gz
 *.toc
+*.olean
+*.ilean
+*.ir
+*.trace

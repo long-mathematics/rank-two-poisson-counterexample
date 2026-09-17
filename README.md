@@ -6,9 +6,14 @@ Christopher D. Long
 
 [![Build paper and verify identities](https://github.com/long-mathematics/rank-two-poisson-counterexample/actions/workflows/verification.yml/badge.svg)](https://github.com/long-mathematics/rank-two-poisson-counterexample/actions/workflows/verification.yml)
 
-This is the companion repository for the paper, with exact computational checks.
-An existing local Lean development is awaiting import and fresh verification; **no
-Lean sources are included in this migration**, and the CI badge does not certify Lean proofs.
+[![Build and audit Lean](https://github.com/long-mathematics/rank-two-poisson-counterexample/actions/workflows/lean-ci.yml/badge.svg)](https://github.com/long-mathematics/rank-two-poisson-counterexample/actions/workflows/lean-ci.yml)
+
+This companion repository contains the manuscript, exact computational checks,
+and the Lean formalization of the main counterexample over ℚ, ℂ, and
+arbitrary characteristic-zero fields. **Full-paper coverage is still in progress.**
+The determinant/symplectic consequences, exhaustive fiber, higher-rank extension,
+and Weyl appendix are separate obligations in the
+[coverage ledger](FORMALIZATION_STATUS.md).
 
 ## Abstract
 
@@ -62,8 +67,11 @@ defines a Poisson endomorphism of $\mathcal{P}_2$ that is not an automorphism. T
 | --- | --- |
 | `rank_two_poisson_counterexample.tex` | Canonical manuscript source |
 | `rank_two_poisson_counterexample.pdf` | Tracked paper PDF |
-| `scripts/` | Four preserved verifiers, recorded outputs, and the test runner |
-| `FORMALIZATION_STATUS.md` | Lean import status and verification requirements |
+| `RankTwoPoisson.lean`, `RankTwoPoisson/` | Root umbrella and mathematical Lean modules |
+| `lakefile.lean`, `lake-manifest.json`, `lean-toolchain` | Pinned root Lake project |
+| `scripts/` | Exact verifiers, source/axiom audits, and current checked outputs |
+| `FORMALIZATION_STATUS.md` | Named results, supporting obligations, exact coverage and dependencies |
+| `MANUSCRIPT_MAP.md` | Module correspondence and alternate proof routes |
 | `CITATION.cff` | Citation metadata and arXiv DOI |
 | `AGENTS.md` | Mathematical integrity and repository instructions |
 
@@ -75,9 +83,7 @@ With TeX Live and latexmk installed:
 latexmk -pdf -interaction=nonstopmode -halt-on-error rank_two_poisson_counterexample.tex
 ```
 
-The PDF is intentionally tracked; LaTeX auxiliary files are ignored. The migrated
-TeX and PDF are byte-for-byte copies of their source versions, renamed only.
-A fresh local compilation was also checked during migration.
+The PDF is intentionally tracked; LaTeX auxiliary files are ignored.
 
 ## Reproduce the exact checks
 
@@ -109,25 +115,44 @@ test. The determinant is actually computed by the other verifiers.
 
 ## Lean formalization
 
-The existing local development will be imported without restarting the proofs.
-The intended layout is a root Lake project with `RankTwoPoisson.lean`,
-mathematical modules under `RankTwoPoisson/`, and audit tools and outputs under
-`scripts/`. Preserve existing declaration names. See
-[FORMALIZATION_STATUS.md](FORMALIZATION_STATUS.md) for the acceptance checklist.
+With elan installed, reproduce the pinned build and audits:
 
-## Provenance and workflow
+```sh
+lake exe cache get
+lake build
+python3 scripts/audit_sources.py
+lake env lean scripts/AxiomAudit.lean
+lake env lean scripts/StatementAudit.lean
+```
 
-The manuscript and four script/output pairs were copied from
-[`octonion/mathematics/poisson` at `eef71f7b64ad`](https://github.com/octonion/mathematics/tree/eef71f7b64adfb3512a5d006db15d1e51965e8fc/poisson).
-The source repository retains the historical commits. This is a snapshot migration,
-not a rewritten or imported Git history. The old directory remains intact until
-the destination migration is accepted.
+Lean is pinned to `leanprover/lean4:v4.32.1`; mathlib is `v4.32.1` at
+`520045ab14e26149ee970e2e617ca04b09bde5d6`. The manifest fixes all transitive
+revisions. Do not run `lake update` merely to rebuild. The library imports all of
+Mathlib, so the first cache download is substantial.
+For a clean project rebuild retaining only dependency caches:
 
-Changes use a feature branch and pull request, then successful checks and squash
-merge. After Lean CI is operational, the intended main-branch ruleset requires
-`Build and audit Lean`, prohibits force pushes and deletion, and has no bypass,
-human-approval requirement, signed-commit requirement, or strict freshness requirement.
-That ruleset is a setup target, not a claim that it is already active.
+```sh
+lake clean rank_two_poisson
+lake build
+```
+
+The exported statements are `RankTwoPoisson.explicit_counterexample`,
+`RankTwoPoisson.explicit_counterexample_complex`, and
+`RankTwoPoisson.explicit_counterexample_charZero K` (only `[Field K] [CharZero K]`).
+They prove bracket preservation for every pair of polynomials and nonautomorphism
+of the substitution algebra map. The proof uses an explicit point collision;
+it does not claim that the entire three-point fiber has been classified in Lean.
+
+[Lean CI](.github/workflows/lean-ci.yml) builds all seven mathematical modules
+through the default root library. It checks source escapes, import closure,
+the named-result ledger, and transitive axiom dependencies of every declaration
+originating in a project module, including private/generated constants. Only
+`propext`, `Classical.choice`, and `Quot.sound` are permitted.
+Current verification results are recorded in the [coverage ledger](FORMALIZATION_STATUS.md).
+Paper and exact-check CI remain independent.
+
+The [original GitHub directory](https://github.com/octonion/mathematics/tree/main/poisson)
+links here; the paper is [arXiv:2608.23777](https://arxiv.org/abs/2608.23777).
 
 ## Citation and license
 

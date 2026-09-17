@@ -1,0 +1,52 @@
+name: Lean CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lean-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build and audit Lean
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      LEAN_NUM_THREADS: "2"
+      MATHLIB_NO_CACHE_ON_UPDATE: "1"
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Audit sources, build coverage, and manuscript ledger
+        run: |
+          python3 -m unittest discover -s scripts -p 'test_audit_sources.py'
+          python3 scripts/audit_sources.py
+      - name: Install pinned Lean
+        uses: leanprover/lean-action@50fcf42d2e460296f1a34b402e990d1b24f8b596 # v1
+        with:
+          auto-config: "false"
+          build: "false"
+          test: "false"
+          lint: "false"
+          use-github-cache: "false"
+          use-mathlib-cache: "false"
+      - name: Fetch pinned dependency cache
+        run: |
+          lake exe cache get
+          git diff --exit-code -- lean-toolchain lakefile.lean lake-manifest.json
+      - name: Build all mathematical modules from source
+        run: lake build
+      - name: Audit every project declaration transitively
+        run: |
+          lake env lean scripts/AxiomAudit.lean > /tmp/axiom-audit.txt
+          cat /tmp/axiom-audit.txt
+          diff -u scripts/axiom-audit.txt /tmp/axiom-audit.txt

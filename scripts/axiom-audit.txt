@@ -1,0 +1,10 @@
+Axiom audit passed: 8 modules, 281 declarations, 188 theorem constants.
+All transitive dependencies lie in {propext, Classical.choice, Quot.sound}.
+'RankTwoPoisson.explicit_counterexample' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.explicit_counterexample_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.explicit_counterexample_charZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.SourceCoordinates.two_sided_inverse_certificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RankTwoPoisson.Core.coefficient_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Core.core_jacobian' depends on axioms: [propext, Classical.choice, Quot.sound]

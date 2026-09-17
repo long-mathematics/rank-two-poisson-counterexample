@@ -1,51 +1,146 @@
-# Formalization status
+# Formalization coverage and continuation ledger
 
-## Current repository status
+The mathematical source of truth is `rank_two_poisson_counterexample.tex`.
+The Lean library uses the `RankTwoPoisson` namespace and Lean/mathlib 4.32.1.
+**This is partial paper coverage; complete coverage is the goal.**
+No missing conclusion may be assumed to complete another row.
 
-**Local Lean development not yet imported or reverified.**
+## Status and conventions
 
-This migration contains the manuscript, its existing PDF, four exact Python
-verification programs, their historical output files, and non-Lean CI.
-There are no Lean declarations or Lake configuration files in this stage.
-Successful paper/identity CI is not evidence of Lean coverage.
+- **PROVED**: the stated Lean result passed a fresh build and axiom audit.
+- **PARTIAL**: only the explicitly described components are proved.
+- **MISSING**: no corresponding proof exists in the current library.
+- **UNVERIFIED**: source exists but fresh verification has not yet completed.
+- `Q` means `MvPolynomial (Fin 4) ℚ`, in coordinate order `(x,q,p,z)`;
+  `C` means the same polynomial ring over `ℂ`;
+  `K` means any universe-polymorphic field with `[Field K] [CharZero K]`.
+- All declaration names below are relative to `RankTwoPoisson`.
+  `Core` uses `MvPolynomial (Fin 3) ℚ` with order `(x,y,β)`.
+- `IsPoisson`, `IsPoissonC`, and `IsPoissonK` quantify over **all** pairs of
+  polynomials. `IsAlgAutomorphism` and its scalar extensions mean existence of
+  an `AlgEquiv` with the specified underlying algebra homomorphism.
+- A claim proved over Q is not automatically marked proved over C. Where no
+  scalar-transport wrapper exists, that missing correspondence is stated.
 
-The owner reports an existing local formalization. Earlier development records
-refer to the `RankTwoPoisson` namespace and Lean/mathlib v4.32.1, with rational
-and complex counterexample theorems. Those records are historical context, not
-fresh build evidence. The supplied local project will determine the actual
-toolchain, source inventory, and current proof status.
+## Named manuscript results
 
-## Import and acceptance checklist
+Each row includes all conclusions of the named result, including those not in
+its current Lean counterpart. The source audit checks this inventory against
+all named theorem/lemma/proposition/corollary environments in the manuscript.
 
-- Obtain the complete local project, including all Lean sources, Lake config,
-  `lake-manifest.json`, `lean-toolchain`, manuscript map, and audit documents.
-  Exclude `.lake/`, compiled objects, and other build caches.
-- Record provenance and first build the unchanged project with its existing pins.
-- Keep Lake configuration and the umbrella module at repository root;
-  mathematical modules belong in `RankTwoPoisson/`.
-- Preserve theorem names and proof content. Move only auxiliary audit/certificate
-  tools and their recorded outputs into `scripts/`, updating references.
-- Build every project module from a clean checkout using pinned Lean and mathlib.
-- Audit project sources for `sorry`, `admit`, added axioms, unchecked shortcuts,
-  and proof modules omitted from the build.
-- Audit transitive axiom dependencies. The permitted foundations are
-  `propext`, `Classical.choice`, and `Quot.sound`; report anything else.
-- Map each manuscript result to actual declarations and explicit hypotheses.
-  Check preservation of the bracket on all polynomials, not only generators,
-  and distinguish nonautomorphism, noninjectivity of the point map, and exact
-  fiber classification.
-- Audit rational, complex, and general characteristic-zero statements separately.
-  Also inventory the symplectic/Jacobian consequences, higher-rank extension,
-  and Weyl-algebra appendix; do not infer their coverage from the main theorem.
-- Add `.github/workflows/lean-ci.yml` with the job name
-  `Build and audit Lean`, running the real build and source/axiom audits.
-- Require successful CI before squash merge and configure the agreed main ruleset.
+| Manuscript label | Status | Exact scope, declarations, hypotheses, and dependencies |
+| --- | --- | --- |
+| `thm:main` | PARTIAL | `explicit_counterexample` (Q), `explicit_counterexample_complex` (C), `explicit_counterexample_charZero K` (K) assert global bracket preservation and nonautomorphism, without extra mathematical assumptions. Dependencies P01–P03, F01–F04, B01–B03. Four-dimensional determinant and exhaustive complex fiber remain missing (J01, F06). |
+| `lem:symplectic-criterion` | MISSING | For arbitrary four complex polynomials: equivalence of global Poisson preservation, six generator relations, and the pullback two-form identity, implying determinant one. Only the specific-map generator-to-polynomial argument P03 exists. Needs J01–J04. |
+| `lem:R-factorization` | PROVED | `R_factorization : R = x * (2 - 3*x*q)` over Q, with no hypotheses. Exact definitions D01. Explicit complex wrapper missing. |
+| `prop:source-automorphism` | PARTIAL | `SourceCoordinates.two_sided_inverse_certificate` proves both coordinate composites for Ψ₀ over Q; `source_block_det` proves its 2×2 block determinant −1. Bundled polynomial equivalence, 4×4 determinant, corrected Ψ, and C transport remain missing (S01–S05). |
+| `prop:coefficient-identity` | PARTIAL | `Core.coefficient_identity` proves all three formal wedge coefficients over Q, using D02 and A01–A04. No abstract exterior-algebra/pullback theorem or C wrapper. |
+| `thm:poisson-identities` | PARTIAL | `six_brackets`, `Phi_isPoisson` over Q; `bracketC_outputC_outputC`, `PhiC_isPoisson` over C; corresponding K theorems. Depends on D01, P01–P04, B01. The 4×4 determinant consequence is missing (J01). |
+| `prop:core-jacobian` | PARTIAL | `Core.core_jacobian : Core.jac3 Core.r Core.t Core.s = 1`, over Q, no hypotheses. `jac3` is the explicit 3×3 determinant formula with rows `(r,t,s)` and columns `(x,y,β)`. Matrix.det identification and C transport missing (J05). |
+| `prop:induced-bracket` | MISSING | Canonical bracket restricted to C[x,y,β] equals −det ∂(R,f,g)/∂(x,y,β) for all f,g; induced generator brackets and Casimir property. Needs S04, I01–I03. Specific output bracket consequences are P01. |
+| `prop:not-automorphism` | PROVED | `Phi_not_automorphism`, `PhiC_not_automorphism`, `PhiK_not_automorphism K` prove algebra-map nonautomorphism using explicit collisions and evaluation of an inverse algebra equivalence (F01–F05, B02–B03). This substitutes for the paper's prime-ideal/CRT argument. |
+| `prop:exact-fiber` | MISSING | For every v : Fin 4 → ℂ, pointMapC PhiC v = (0,1/8,0,0) iff v is one of the three displayed points. Existing F01 proves only membership over Q, B02 transports evaluations, and only two named C/K points are exported. Needs F06–F10. |
+| `cor:all-poisson-ranks` | MISSING | For every n ≥ 2, construct a bracket-preserving nonautomorphic endomorphism on 2n polynomial variables over C. Needs N01–N03; no rank restriction may be assumed away. |
+| `thm:explicit-DC4` | MISSING | Actual C-algebra endomorphism of the fourth Weyl algebra, Xi ↦ (R,T,D,S)i, ∂i ↦ (HD,HS,−HR,−HT)i, with proved defining relations and non-surjectivity. Needs W01–W09. Polynomial identities alone do not prove this result. |
 
-Until these checks are complete, no full-paper Lean certification is claimed.
+## Supporting obligations and dependency order
 
-## Migration validation
+Rows are proof obligations, not assertions that every intermediate calculation
+must use the manuscript's exact proof route. An equivalent route must document
+which intermediate obligations it replaces. Historical/bibliographic assertions
+and reported software timings are outside mathematical formalization.
 
-The manuscript compiles to 17 pages without LaTeX warnings. Exact script results
-and the migration commit are recorded in the migration pull request.
-The original TeX, PDF, and four verifier/output pairs are preserved byte-for-byte
-under their new paths.
+| ID | Status | Precise claim / current declaration | Dependencies |
+| --- | --- | --- | --- |
+| D01 | PROVED | Exact Q definitions `a,B,beta,y,u,R,S,T,D0,H,D,bracket,output,Phi` match construction equations; bracket is fp gx − fx gp + fz gq − fq gz; output order (R,T,D,S). | — |
+| D02 | PROVED | `Core.r,s,t,h,Q3,A1,A2,A3,wedgeCoeff,jac3` match independent-variable construction and determinant expansion over Q. | D01 (correspondence) |
+| D03 | MISSING | Lean equality identifying substitution of the independent core into (x,y,β) with R,T,S,H. | D01, D02 |
+| D04 | MISSING | Reported expanded term counts/degrees of β,y,R,S,T,H,D and correspondence to the announced normalized core. | D01, D02 |
+| S01 | PROVED | `SourceCoordinates.source_block_det`: 2×2 block determinant equals −1, as a Q polynomial identity. | D01 |
+| S02 | PROVED | `SourceCoordinates.inverse_certificate`: βBack=p, yBack=q, D0Back=z in independent inverse coordinates. | D01 |
+| S03 | PROVED | `SourceCoordinates.two_sided_inverse_certificate`: S02 and Qorig=q, pRecovered=p, zRecovered=z. x is unchanged. | S02 |
+| S04 | MISSING | Bundle Ψ₀ and Ψ as polynomial algebra equivalences over K (hence C), establishing algebraic independence of x,y,β and the explicit inverse with D−H. | S03, D03 |
+| S05 | MISSING | Full Jacobian determinants det JΨ₀ = det JΨ = −1; triangular shear calculation. | S04 |
+| A01 | MISSING | Appendix derivative formulas for all first partials of r,s,t,h, including P₁′ and P₂′. Existing proofs unfold derivatives internally; they do not export this list. | D02 |
+| A02 | PROVED | `Core.coefficient_identity`: wedge(r,h)+wedge(t,s) equals A₁,A₂,A₃ in slots 01,02,12. Private `coeff_XY`, `coeff_XW`, `coeff_YW` are included transitively. | D02 |
+| A03 | MISSING | Appendix's three expanded coefficient expressions and equality with A₁,A₂,A₃. | A01, A02 |
+| A04 | MISSING | Source differential formulas for dQ,dp,dz; ω = dR∧dD₀ + Θ in source coordinates. | S04, D03 |
+| P01 | PROVED | Six exact Q brackets: `bracket_D_R`, `bracket_S_T` = 1 and `bracket_R_S`, `bracket_R_T`, `bracket_D_S`, `bracket_D_T` = 0; bundled `six_brackets`. No assumed identities. | D01 |
+| P02 | PROVED | `bracket_skew`, `bracket_self`, constant/additive/Leibniz laws; `bracket_X_X`, `bracket_output_output`. | D01, P01 |
+| P03 | PROVED | `Phi_generator_bracket`, `Phi_preserves_right_generator`, `Phi_isPoisson`: two polynomial inductions establish ∀f g, {Φf,Φg}=Φ{f,g}. | P02 |
+| P04 | MISSING | Jacobi identity for the canonical bracket, with Hamiltonian commutator identity for arbitrary polynomials. A reusable Poisson structure is optional; the law itself is required for W03. | D01, P02 |
+| B01 | PROVED | `polyDeriv_mapC`, `bracket_mapC`, `PhiC_isPoisson`; `polyDeriv_mapK`, `bracket_mapK`, `PhiK_isPoisson K`. Derivatives/brackets commute with Q coefficient extension; all-polynomial preservation is proved afresh by induction. | P01–P03 |
+| F01 | PROVED | `point0_image`, `point1_image`, `point2_image`: the three exact rational source points map to `target`. | D01 |
+| F02 | PROVED | `point0_ne_point1`: first two rational points differ; third point's pairwise distinctions not separately exported. | F01 (definitions only) |
+| F03 | PROVED | `pointMap_of_equiv_injective`: any Q-polynomial algebra equivalence induces an injective point map; no assumption that the specific Φ is invertible. | D01 |
+| F04 | PROVED | `Phi_not_automorphism`, `explicit_counterexample`: contradiction between F01/F02 and F03. This is stronger than merely reporting a point collision. | F01–F03, P03 |
+| F05 | MISSING | Standalone theorem ¬Function.Injective (pointMap Phi), and C/K variants; the needed collision is proved but this formulation is not exported. No noninjectivity of the algebra map is claimed. | F01, F02, B02 |
+| B02 | PROVED | `aeval_mapC_complexPoint`, `pointMapC_PhiC_complexPoint`, `point0C_image`, `point1C_image`, `point0C_ne_point1C`; respective K transport theorems and points. K assumes only Field and CharZero. | F01, F02, B01 |
+| B03 | PROVED | `pointMapC_of_equiv_injective`, `PhiC_not_automorphism`, `explicit_counterexample_complex`; corresponding K theorems culminating in `explicit_counterexample_charZero K`. | F03, B02, B01 |
+| F06 | MISSING | Exhaustive core fiber: for arbitrary (x,y,β) over K, (r,t,s)=(0,1/8,0) iff it is one of (0,0,−1/4),(1,−3/2,13/2),(−1,3/2,13/2). | D02, F07 |
+| F07 | MISSING | Localized formulas at x≠0 with w=1+xy, α=2−3xy−x²β; reduction of fiber equations to α=0, w=−1/2, x²=1, with separate x=0 case. | D02 |
+| F08 | PROVED | `Core.corePoint0_image`, `corePoint1_image`, `corePoint2_image`: three rational core memberships, no exhaustiveness. | D02 |
+| F09 | MISSING | H-values −1/48 and −1097/192 at core fiber points and inverse-coordinate recovery of q,p,z; full complex fiber iff. | F06, S04, D03 |
+| F10 | MISSING | Gröbner certificate: equality of the fiber ideal with (β−(27x²−1)/4, y+3x/2, x(x−1)(x+1)); reduced fiber scheme. | F06 or explicit ideal identities |
+| I01 | MISSING | Induced generator brackets {x,y}=x³, {x,β}=−3x², {y,β}=−2+6xy+3x²β. | D01 |
+| I02 | MISSING | Induced bracket formula for all polynomials in x,y,β, not just generators; R is Casimir on that subalgebra. | I01, S04, P02 |
+| I03 | MISSING | {D₀,R}=1 and {H,R}=0 as separate statements; specific {D,R}=1 already P01. | I02, D01 |
+| J01 | MISSING | det of the actual 4×4 formal Jacobian of (R,T,D,S) with columns (x,q,p,z) equals 1 over Q/C/K. | P01, J03 |
+| J02 | MISSING | Pullback of ω=dx∧dp+dq∧dz under the map equals ω, represented by every alternating coefficient or an exterior form. | P01, J03 |
+| J03 | MISSING | General matrix equivalence between J Ω⁻¹ Jᵀ=Ω⁻¹ and Jᵀ Ω J=Ω, with Ω for ordered (x,q,p,z), and determinant +1 rather than merely ±1. | matrix identities |
+| J04 | MISSING | General equivalence of generator brackets and all-polynomial preservation for an arbitrary substitution; assemble symplectic criterion over C. | P02, J03 |
+| J05 | PARTIAL | `Core.core_jacobian` proves the expanded rational determinant equals 1; identify with Matrix.det and extend scalars for the full complex proposition. | D02 |
+| J06 | MISSING | Localized core source/target determinant factors and point-map factorization σ∘(G×id)∘Ψ. May be replaced by direct determinant proof, with correspondence documented. | S04, J05, D03 |
+| N01 | MISSING | Canonical bracket on n pairs with variable order and embedding of the four original coordinates explicit; bracket laws. | P02 (proof route) |
+| N02 | MISSING | For every n≥2 extend Φ by identity on remaining pairs and prove global bracket preservation. | N01, P03, B01 |
+| N03 | MISSING | Extend the displayed collision to n pairs and prove nonautomorphism of the algebra map. This can replace the paper's irreducibility argument. | N02, B02, F03 |
+| W01 | MISSING | Actual fourth Weyl algebra over C with generators Xi,∂i and the stated universal defining relations; polynomial representation. | noncommutative algebra infrastructure |
+| W02 | MISSING | Hamiltonian derivations HD,HS,−HR,−HT as elements of that algebra; δi(fj)=δij. | W01, B01 |
+| W03 | MISSING | [HF,HG]=H{F,G} and commutation of δi; multiplication operators fi commute. | P04, W01, W02 |
+| W04 | MISSING | Construct actual endomorphism widehatΦ using the universal property and all Weyl relations; verify generator images. | W02, W03 |
+| W05 | MISSING | Polynomial substitution ΦC is injective / fi are algebraically independent, via invertible formal Jacobian or canonical derivations. | J01 or W02 |
+| W06 | MISSING | Weyl PBW basis, differential-order filtration, associated graded C[X,ξ], and principal-symbol formulas. These support the manuscript route; an equivalent non-surjectivity argument may avoid them. | W01 |
+| W07 | MISSING | A Jfᵀ=I and A invertible; symbol monomials η^β independent; no cancellation of highest differential order. | J01, W02, W05, W06 |
+| W08 | MISSING | Prove non-surjectivity of the actual Weyl endomorphism, then nonautomorphism, without assuming either. Investigate alternative: the image operators preserve C[f] and send 1 into C[f]; surjectivity would force every multiplication polynomial into C[f], contradicting the collision. | W04, B02; manuscript route also W05–W07 |
+| W09 | MISSING | Correspondence of quotient/universal Weyl construction to the manuscript differential-operator model; faithfulness/PBW if needed by the chosen route. | W01, W06 |
+
+## Fresh validation
+
+- Lean `4.32.1`, compiler commit `f054605aea4b840552cca2e725580bffd1e1b704`.
+- mathlib `v4.32.1`, revision `520045ab14e26149ee970e2e617ca04b09bde5d6`;
+  all nine dependency revisions match `lake-manifest.json`.
+- `lake build` from no project build products: passed, 8,663 jobs. The 86 existing
+  warnings concern unused simp arguments, tactic style and section variables;
+  there are no build errors. Pinned dependency caches are reused.
+- `python3 scripts/audit_sources.py`: passed for 11 Lean files and all eight
+  library modules (seven mathematical files plus umbrella). All 12 named results
+  have ledger entries; the 51 supporting obligations have acyclic dependencies.
+- `lake env lean scripts/AxiomAudit.lean`: passed for all 281 declarations
+  originating in project modules, including 188 theorem constants and all
+  private/generated declarations. Every transitive axiom set is contained in
+  `{propext, Classical.choice, Quot.sound}`. Current output is
+  [`scripts/axiom-audit.txt`](scripts/axiom-audit.txt).
+- `lake env lean scripts/StatementAudit.lean`: main statements, definitions,
+  quantifiers, coordinate ordering and field hypotheses inspected successfully.
+- All four exact Python verifiers passed with empty stderr and byte-for-byte
+  recorded-output matches; expected outputs were not changed. All 19 regression
+  tests pass (six verification-runner tests, thirteen source/coverage tests).
+- The manuscript and PDF are unchanged. Paper and exact-verification CI are
+  retained alongside the `Build and audit Lean` job.
+- Hosted verification results are available through the README workflow badges.
+
+## Continuation plan
+
+1. Complete fresh builds, exact Python checks, source/module/ledger audit,
+   transitive axiom audit, CI, and main-only protection.
+2. Exact fiber and coordinate correspondence (D03, S04, F06–F09), with appendix
+   derivative/coefficient certificates as independent tractable work.
+3. Four-dimensional Jacobian/symplectic criterion and induced bracket.
+4. Higher rank construction and proof.
+5. Weyl presentation, Hamiltonian relations, actual endomorphism and
+   non-surjectivity; assess PBW/model-correspondence requirements explicitly.
+6. Close remaining substantive support claims and run a final full statement
+   correspondence and transitive-axiom audit before claiming complete coverage.
+
+No substantive mathematical error has been identified in the inspected Lean
+statements. This is not a certification of the manuscript's missing results.
