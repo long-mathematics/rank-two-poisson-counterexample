@@ -1,4 +1,4 @@
-Axiom audit passed: 9 modules, 333 declarations, 235 theorem constants.
+Axiom audit passed: 11 modules, 379 declarations, 274 theorem constants.
 All transitive dependencies lie in {propext, Classical.choice, Quot.sound}.
 'RankTwoPoisson.explicit_counterexample' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RankTwoPoisson.explicit_counterexample_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -11,3 +11,9 @@ All transitive dependencies lie in {propext, Classical.choice, Quot.sound}.
 'RankTwoPoisson.Fiber.exact_fiber_charZero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RankTwoPoisson.Fiber.exact_fiber_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RankTwoPoisson.Fiber.exact_fiber_rational' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Symplectic.criterion_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Symplectic.output_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Symplectic.output_symplectic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Symplectic.main_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Core.core_det_charZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Core.coefficient_identity_matrix' depends on axioms: [propext, Classical.choice, Quot.sound]

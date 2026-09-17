@@ -30,13 +30,13 @@ all named theorem/lemma/proposition/corollary environments in the manuscript.
 
 | Manuscript label | Status | Exact scope, declarations, hypotheses, and dependencies |
 | --- | --- | --- |
-| `thm:main` | PARTIAL | `explicit_counterexample` (Q), `explicit_counterexample_complex` (C), `explicit_counterexample_charZero K` (K) assert global bracket preservation and nonautomorphism, without extra mathematical assumptions. Dependencies P01–P03, F01–F04, B01–B03. The exact complex fiber is `Fiber.exact_fiber_complex`, with `Fiber.fiber_points_distinct`. The four-dimensional determinant remains missing (J01). |
-| `lem:symplectic-criterion` | MISSING | For arbitrary four complex polynomials: equivalence of global Poisson preservation, six generator relations, and the pullback two-form identity, implying determinant one. Only the specific-map generator-to-polynomial argument P03 exists. Needs J01–J04. |
+| `thm:main` | PROVED | `Symplectic.main_complex` bundles global bracket preservation, algebra-map nonautomorphism, the actual four-dimensional Jacobian determinant one, the exhaustive fiber iff for every complex point, and pairwise distinctness of its three points. It has no mathematical hypotheses. Dependencies P01–P03, B01–B03, F01–F09, J01. The original rational and arbitrary-characteristic-zero counterexamples are preserved. |
+| `lem:symplectic-criterion` | PROVED | For arbitrary F : Fin 4 → PC, `Symplectic.criterion_complex` equates IsPoissonC (aeval F) with Jᵀ Ω J = Ω; `six_criterion_complex` equates it with the six displayed brackets; `det_of_poisson_complex` gives det J = 1. `form_entry` proves that this matrix equation is exactly the pullback two-form coefficient identity. No relations on F are assumed in either iff. Dependencies J03–J04. |
 | `lem:R-factorization` | PROVED | `R_factorization : R = x * (2 - 3*x*q)` over Q, with no hypotheses. Exact definitions D01. Explicit complex wrapper missing. |
 | `prop:source-automorphism` | PARTIAL | `SourceCoordinates.two_sided_inverse_certificate` proves both coordinate composites for Ψ₀ over Q; `source_block_det` proves its 2×2 block determinant −1. Bundled polynomial equivalence, 4×4 determinant, corrected Ψ, and C transport remain missing (S01–S05). |
-| `prop:coefficient-identity` | PARTIAL | `Core.coefficient_identity` proves all three formal wedge coefficients over Q, using D02 and A01–A04. No abstract exterior-algebra/pullback theorem or C wrapper. |
-| `thm:poisson-identities` | PARTIAL | `six_brackets`, `Phi_isPoisson` over Q; `bracketC_outputC_outputC`, `PhiC_isPoisson` over C; corresponding K theorems. Depends on D01, P01–P04, B01. The 4×4 determinant consequence is missing (J01). |
-| `prop:core-jacobian` | PARTIAL | `Core.core_jacobian : Core.jac3 Core.r Core.t Core.s = 1`, over Q, no hypotheses. `jac3` is the explicit 3×3 determinant formula with rows `(r,t,s)` and columns `(x,y,β)`. Matrix.det identification and C transport missing (J05). |
+| `prop:coefficient-identity` | PROVED | `Core.coefficient_identity_matrix` proves every coefficient of dr∧dh+dt∧ds equals Θ, represented by `Core.residualForm` in basis (dx,dy,dβ), over Q. It uses the original `Core.coefficient_identity` and proved wedge alternation. This is a coordinate representation of the full form equality, not an assumed differential-form law. D02, A02. |
+| `thm:poisson-identities` | PROVED | `six_brackets`, `Phi_isPoisson`, and scalar-extension counterparts prove the six identities and all-polynomial preservation. `Symplectic.output_det_rational`, `output_det_complex`, and `output_det K` prove the actual 4×4 determinant consequence over Q/C/K. Dependencies D01, P01–P03, B01, J01. |
+| `prop:core-jacobian` | PROVED | `Core.core_det_rational` identifies the original `Core.core_jacobian` certificate with Matrix.det of rows (r,t,s), columns (x,y,β). `Core.core_det_charZero K` transports the determinant identity to every characteristic-zero field, including C. No extra hypotheses. D02, J05. |
 | `prop:induced-bracket` | MISSING | Canonical bracket restricted to C[x,y,β] equals −det ∂(R,f,g)/∂(x,y,β) for all f,g; induced generator brackets and Casimir property. Needs S04, I01–I03. Specific output bracket consequences are P01. |
 | `prop:not-automorphism` | PROVED | `Phi_not_automorphism`, `PhiC_not_automorphism`, `PhiK_not_automorphism K` prove algebra-map nonautomorphism using explicit collisions and evaluation of an inverse algebra equivalence (F01–F05, B02–B03). This substitutes for the paper's prime-ideal/CRT argument. |
 | `prop:exact-fiber` | PROVED | `Fiber.exact_fiber_complex`: for every v : Fin 4 → ℂ, pointMapC PhiC v = targetC iff v = point0C ∨ v = point1C ∨ v = complexPoint point2. `Fiber.exact_fiber_charZero` proves the same over K; `Fiber.exact_fiber_rational` covers Q. `Fiber.fiber_points_distinct` proves all three points differ. Dependencies F06–F09, S03, B02; the separate Gröbner/scheme certificate F10 is not needed. |
@@ -62,7 +62,7 @@ and reported software timings are outside mathematical formalization.
 | S04 | MISSING | Bundle Ψ₀ and Ψ as polynomial algebra equivalences over K (hence C), establishing algebraic independence of x,y,β and the explicit inverse with D−H. | S03, D03 |
 | S05 | MISSING | Full Jacobian determinants det JΨ₀ = det JΨ = −1; triangular shear calculation. | S04 |
 | A01 | MISSING | Appendix derivative formulas for all first partials of r,s,t,h, including P₁′ and P₂′. Existing proofs unfold derivatives internally; they do not export this list. | D02 |
-| A02 | PROVED | `Core.coefficient_identity`: wedge(r,h)+wedge(t,s) equals A₁,A₂,A₃ in slots 01,02,12. Private `coeff_XY`, `coeff_XW`, `coeff_YW` are included transitively. | D02 |
+| A02 | PROVED | `Core.coefficient_identity` proves the three independent wedge coefficients; `Core.coefficient_identity_matrix` proves all nine entries against `residualForm`, using wedge skew symmetry and zero diagonal. The private coefficient proofs are included transitively. | D02 |
 | A03 | MISSING | Appendix's three expanded coefficient expressions and equality with A₁,A₂,A₃. | A01, A02 |
 | A04 | MISSING | Source differential formulas for dQ,dp,dz; ω = dR∧dD₀ + Θ in source coordinates. | S04, D03 |
 | P01 | PROVED | Six exact Q brackets: `bracket_D_R`, `bracket_S_T` = 1 and `bracket_R_S`, `bracket_R_T`, `bracket_D_S`, `bracket_D_T` = 0; bundled `six_brackets`. No assumed identities. | D01 |
@@ -85,11 +85,11 @@ and reported software timings are outside mathematical formalization.
 | I01 | MISSING | Induced generator brackets {x,y}=x³, {x,β}=−3x², {y,β}=−2+6xy+3x²β. | D01 |
 | I02 | MISSING | Induced bracket formula for all polynomials in x,y,β, not just generators; R is Casimir on that subalgebra. | I01, S04, P02 |
 | I03 | MISSING | {D₀,R}=1 and {H,R}=0 as separate statements; specific {D,R}=1 already P01. | I02, D01 |
-| J01 | MISSING | det of the actual 4×4 formal Jacobian of (R,T,D,S) with columns (x,q,p,z) equals 1 over Q/C/K. | P01, J03 |
-| J02 | MISSING | Pullback of ω=dx∧dp+dq∧dz under the map equals ω, represented by every alternating coefficient or an exterior form. | P01, J03 |
-| J03 | MISSING | General matrix equivalence between J Ω⁻¹ Jᵀ=Ω⁻¹ and Jᵀ Ω J=Ω, with Ω for ordered (x,q,p,z), and determinant +1 rather than merely ±1. | matrix identities |
-| J04 | MISSING | General equivalence of generator brackets and all-polynomial preservation for an arbitrary substitution; assemble symplectic criterion over C. | P02, J03 |
-| J05 | PARTIAL | `Core.core_jacobian` proves the expanded rational determinant equals 1; identify with Matrix.det and extend scalars for the full complex proposition. | D02 |
+| J01 | PROVED | `Symplectic.output_det K`, `output_det_complex`, `output_det_rational`: Matrix.det of the actual formal Jacobian with rows (R,T,D,S), columns (x,q,p,z), equals 1. `jacobian` and `jacobian_pair` fix the coordinate and bracket conventions. | P01, B01, J03 |
+| J02 | PROVED | `Symplectic.output_symplectic K`, `output_symplectic_complex` prove Jᵀ Ω J=Ω. `output_form_coefficients` spells out every coefficient of dR∧dD+dT∧dS = dx∧dp+dq∧dz, with Ω explicitly defined by `omega`. | P01, B01, J03 |
+| J03 | PROVED | `Symplectic.conjugate_iff` proves the equivalence of primal/dual form identities for inverse matrices U,V; `omega_mul_neg` and `neg_mul_omega` prove the actual inverse identities Ω⁻¹=−Ω. `det_pair` proves the signed 4×4 contraction formula over any commutative ring, giving determinant +1. | — |
+| J04 | PROVED | `Symplectic.preserves_of_generators` proves all-polynomial preservation for any algebra homomorphism from its generator identities. `poisson_iff_canonical`, `canonical_iff_six`, `poisson_iff_symplectic`, and their explicit complex wrappers assemble the general criterion. | P02, J03 |
+| J05 | PROVED | `Core.core_det_rational` identifies the actual 3×3 Matrix.det with the original expanded `jac3` certificate. `core_det_charZero K` commutes coefficient mapping with partial differentiation and determinants to prove the same polynomial identity over K. | D02 |
 | J06 | MISSING | Localized core source/target determinant factors and point-map factorization σ∘(G×id)∘Ψ. May be replaced by direct determinant proof, with correspondence documented. | S04, J05, D03 |
 | N01 | MISSING | Canonical bracket on n pairs with variable order and embedding of the four original coordinates explicit; bracket laws. | P02 (proof route) |
 | N02 | MISSING | For every n≥2 extend Φ by identity on remaining pairs and prove global bracket preservation. | N01, P03, B01 |
@@ -109,14 +109,14 @@ and reported software timings are outside mathematical formalization.
 - Lean `4.32.1`, compiler commit `f054605aea4b840552cca2e725580bffd1e1b704`.
 - mathlib `v4.32.1`, revision `520045ab14e26149ee970e2e617ca04b09bde5d6`;
   all nine dependency revisions match `lake-manifest.json`.
-- `lake build`: passed, 8,664 jobs. CI rebuilds every project module from source.
+- `lake build`: passed, 8,666 jobs. CI rebuilds every project module from source.
   The 86 existing warnings concern unused simp arguments, tactic style and section variables;
   there are no build errors. Pinned dependency caches are reused.
-- `python3 scripts/audit_sources.py`: passed for 12 Lean files and all nine
-  library modules (eight mathematical files plus umbrella). All 12 named results
+- `python3 scripts/audit_sources.py`: passed for 14 Lean files and all eleven
+  library modules (ten mathematical files plus umbrella). All 12 named results
   have ledger entries; the 51 supporting obligations have acyclic dependencies.
-- `lake env lean scripts/AxiomAudit.lean`: passed for all 333 declarations
-  originating in project modules, including 235 theorem constants and all
+- `lake env lean scripts/AxiomAudit.lean`: passed for all 379 declarations
+  originating in project modules, including 274 theorem constants and all
   private/generated declarations. Every transitive axiom set is contained in
   `{propext, Classical.choice, Quot.sound}`. Current output is
   [`scripts/axiom-audit.txt`](scripts/axiom-audit.txt).
@@ -136,7 +136,8 @@ and reported software timings are outside mathematical formalization.
 2. Complete coordinate-algebra correspondence (D03, S04), the separate ideal/scheme
    certificate F10, and the appendix derivative/coefficient certificates. The
    exhaustive point-fiber classification F06–F09 is proved.
-3. Four-dimensional Jacobian/symplectic criterion and induced bracket.
+3. Prove the induced three-variable bracket formula and its Casimir consequences.
+   The four-dimensional Jacobian and general symplectic criterion are proved.
 4. Higher rank construction and proof.
 5. Weyl presentation, Hamiltonian relations, actual endomorphism and
    non-surjectivity; assess PBW/model-correspondence requirements explicitly.

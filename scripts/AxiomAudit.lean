@@ -48,3 +48,11 @@ run_cmd do
 #print axioms RankTwoPoisson.Fiber.exact_fiber_charZero
 #print axioms RankTwoPoisson.Fiber.exact_fiber_complex
 #print axioms RankTwoPoisson.Fiber.exact_fiber_rational
+
+#print axioms RankTwoPoisson.Symplectic.criterion_complex
+#print axioms RankTwoPoisson.Symplectic.output_det
+#print axioms RankTwoPoisson.Symplectic.output_symplectic
+#print axioms RankTwoPoisson.Symplectic.main_complex
+
+#print axioms RankTwoPoisson.Core.core_det_charZero
+#print axioms RankTwoPoisson.Core.coefficient_identity_matrix
