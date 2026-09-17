@@ -64,3 +64,14 @@ run_cmd do
 #print axioms RankTwoPoisson.SourceCoordinates.corrected_det_charZero
 #print axioms RankTwoPoisson.Calculus.jacobi
 #print axioms RankTwoPoisson.Calculus.hamiltonian_commutator
+
+#print axioms RankTwoPoisson.Induced.source_bracket_determinant
+#print axioms RankTwoPoisson.Induced.source_casimir
+#print axioms RankTwoPoisson.Induced.D0_R_charZero
+#print axioms RankTwoPoisson.Induced.H_R_charZero
+#print axioms RankTwoPoisson.Core.DerivativeCertificate.r_derivatives
+#print axioms RankTwoPoisson.Core.DerivativeCertificate.s_derivatives
+#print axioms RankTwoPoisson.Core.DerivativeCertificate.t_derivatives
+#print axioms RankTwoPoisson.Core.DerivativeCertificate.h_derivatives
+#print axioms RankTwoPoisson.Core.DerivativeCertificate.expanded_coefficients
+#print axioms RankTwoPoisson.SourceCoordinates.Forms.omega_split_charZero

@@ -154,7 +154,9 @@ in the manuscript coordinate order.
 
 The source-coordinate algebra equivalences, their explicit inverses and full
 Jacobians, algebraic independence of x,y,β, and the Jacobi and Hamiltonian
-commutator laws are also proved over the indicated coefficient fields.
+commutator laws are also proved over the indicated coefficient fields. The
+induced core bracket, source differential-form calculation, and Appendix A
+derivative certificates are formalized.
 
 [Lean CI](.github/workflows/lean-ci.yml) builds all mathematical modules
 through the default root library. It checks source escapes, import closure,
