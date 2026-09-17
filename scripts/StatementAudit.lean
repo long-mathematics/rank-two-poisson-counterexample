@@ -26,3 +26,8 @@ This supplements the whole-module axiom audit; it adds no mathematical facts. -/
 #check RankTwoPoisson.point1_image
 #check RankTwoPoisson.point2_image
 #check RankTwoPoisson.pointMap_of_equiv_injective
+
+#check RankTwoPoisson.Fiber.exact_fiber_charZero
+#check RankTwoPoisson.Fiber.exact_fiber_complex
+#check RankTwoPoisson.Fiber.exact_fiber_rational
+#check RankTwoPoisson.Fiber.fiber_points_distinct

@@ -14,9 +14,11 @@ The exact claim/hypothesis/dependency/status ledger is
 | `RankTwoPoisson/Collision.lean` | Three rational point evaluations and algebra-map nonautomorphism via collision |
 | `RankTwoPoisson/Complex.lean` | Coefficient extension, all-polynomial complex preservation, collision, algebra-map nonautomorphism |
 | `RankTwoPoisson/CharacteristicZero.lean` | Same extension for every field K of characteristic zero, without further hypotheses |
+| `RankTwoPoisson/ExactFiber.lean` | Exhaustive three-point fiber over Q/C/K, pairwise distinctness, localized formulas, source-coordinate recovery and H-values |
 
-The umbrella imports `CharacteristicZero` and `Complex`; both import `Collision`,
-which imports `Poisson`, which imports all remaining modules. This transitive
+The umbrella imports `CharacteristicZero`, `Complex`, and `ExactFiber`. Their
+dependencies include `Collision` and `Poisson`; the latter imports `Core`,
+`SourceCoordinates`, and `Definitions`. This transitive
 closure is checked by `scripts/audit_sources.py`, and the root Lake library is
 the default build target. Auxiliary Lean audits live under `scripts/` and run
 explicitly after the library build.
@@ -30,5 +32,8 @@ merely noninjectivity of its point map, and it assumes no missing inverse facts.
 The coefficient certificate records the construction's finite two-form
 calculation. The global Poisson theorem independently checks the output brackets
 and uses the biderivation laws; it does not depend on an unproved symplectic
-criterion. The four-dimensional determinant, full form identity, complete fiber,
-higher ranks and Weyl appendix are distinct obligations in the ledger.
+criterion. The exact fiber proof solves the core equations by polynomial combinations,
+including the x=0 case, and recovers original coordinates from the proved inverse
+certificates. It also exports the manuscript's localized formulas. The
+four-dimensional determinant, full form identity, higher ranks, and Weyl appendix
+remain distinct obligations in the ledger.
