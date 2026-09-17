@@ -21,6 +21,7 @@ The exact claim/hypothesis/dependency/status ledger is
 | `RankTwoPoisson/InducedBracket.lean` | All-polynomial induced negative-Jacobian bracket over K, Casimir R, and separate D₀/R and H/R identities |
 | `RankTwoPoisson/DerivativeCertificate.lean` | Appendix A: all first derivatives and three expanded coefficient expressions |
 | `RankTwoPoisson/SourceForms.lean` | All source differential and two-form coefficients, including ω=dR∧dD₀+Θ |
+| `RankTwoPoisson/HigherRank.lean` | Identity extension, explicit canonical reindexing, and non-surjective Poisson endomorphisms for every n≥2 over K |
 | `RankTwoPoisson/CoreGeometry.lean` | Actual 3×3 core Jacobian over Q/K and complete residual form coefficient matrix |
 
 The umbrella imports every mathematical layer, including the source-equivalence and
@@ -47,7 +48,7 @@ The matrix Ω represents dx∧dp+dq∧dz, its inverse −Ω is the bracket matri
 `form_entry` identifies each pulled-back coefficient with JᵀΩJ. A directly
 proved 4×4 contraction formula establishes determinant +1. `CoreGeometry`
 identifies the old expanded core determinant with Matrix.det and transports it
-coefficientwise. Higher ranks and the Weyl appendix remain open.
+coefficientwise. The Weyl endomorphism remains open.
 
 The source coordinate automorphisms are represented contravariantly by
 substitution algebra equivalences. Their inverse generator images are the
@@ -65,3 +66,12 @@ formula is proved for arbitrary f,g, not only the three generators. The appendix
 derivative certificates state the complete displayed lists, while `SourceForms`
 represents one-forms by all four coefficients and two-forms by all sixteen
 alternating entries, in independent order (X,Y,W,E₀).
+
+For higher rank, the original four variables are first adjoined to m independent
+canonical pairs. The substitution fixes every extra generator, and an explicit
+variable equivalence sends (x,q,p,z) to ((0,0),(1,0),(0,1),(1,1)) in the first
+two pairs. `reindex_bracket` proves that this carries the bracket to the
+manuscript’s exact sum on 2+m pairs. The original collision extends by zeros;
+surjectivity would make the point map injective. Conjugation by the variable
+equivalence preserves this contradiction, giving non-surjectivity and hence
+nonautomorphism for every n≥2, over C and every characteristic-zero field.

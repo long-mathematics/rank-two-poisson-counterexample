@@ -75,3 +75,12 @@ run_cmd do
 #print axioms RankTwoPoisson.Core.DerivativeCertificate.h_derivatives
 #print axioms RankTwoPoisson.Core.DerivativeCertificate.expanded_coefficients
 #print axioms RankTwoPoisson.SourceCoordinates.Forms.omega_split_charZero
+
+#print axioms RankTwoPoisson.HigherRank.canonical_px
+#print axioms RankTwoPoisson.HigherRank.reindex_bracket
+#print axioms RankTwoPoisson.HigherRank.standardPhi_X
+#print axioms RankTwoPoisson.HigherRank.standardPhi_X_extra
+#print axioms RankTwoPoisson.HigherRank.standardPhi_preserves
+#print axioms RankTwoPoisson.HigherRank.standardPhi_not_surjective
+#print axioms RankTwoPoisson.HigherRank.every_rank
+#print axioms RankTwoPoisson.HigherRank.base_not_surjective

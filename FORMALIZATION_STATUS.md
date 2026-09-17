@@ -40,7 +40,7 @@ all named theorem/lemma/proposition/corollary environments in the manuscript.
 | `prop:induced-bracket` | PROVED | `Induced.source_bracket_determinant K f g` proves the ambient bracket of the two core-substituted polynomials equals the substitution of −det ∂(r3,f,g)/∂(x,y,β), for all independent core polynomials over K, hence C. `r3_map` and D03 identify r3 with R; S04 establishes the subalgebra coordinates are independent. `source_generators` proves all nine generator entries and `source_casimir` the Casimir property. The particular S,T consequences are P01/B01. I01–I03. |
 | `prop:not-automorphism` | PROVED | `Phi_not_automorphism`, `PhiC_not_automorphism`, `PhiK_not_automorphism K` prove algebra-map nonautomorphism using explicit collisions and evaluation of an inverse algebra equivalence (F01–F05, B02–B03). This substitutes for the paper's prime-ideal/CRT argument. |
 | `prop:exact-fiber` | PROVED | `Fiber.exact_fiber_complex`: for every v : Fin 4 → ℂ, pointMapC PhiC v = targetC iff v = point0C ∨ v = point1C ∨ v = complexPoint point2. `Fiber.exact_fiber_charZero` proves the same over K; `Fiber.exact_fiber_rational` covers Q. `Fiber.fiber_points_distinct` proves all three points differ. Dependencies F06–F09, S03, B02; the separate Gröbner/scheme certificate F10 is not needed. |
-| `cor:all-poisson-ranks` | MISSING | For every n ≥ 2, construct a bracket-preserving nonautomorphic endomorphism on 2n polynomial variables over C. Needs N01–N03; no rank restriction may be assumed away. |
+| `cor:all-poisson-ranks` | PROVED | `HigherRank.every_rank K n hn` constructs a canonical-bracket-preserving, non-surjective and nonautomorphic algebra endomorphism of MvPolynomial (Fin n × Fin 2) K for every n with hn : 2 ≤ n. K only requires Field and CharZero, hence includes C. Position/momentum have second index 0/1; `canonical_px`, `canonical_xx`, `canonical_pp` prove the manuscript convention. N01–N03. |
 | `thm:explicit-DC4` | MISSING | Actual C-algebra endomorphism of the fourth Weyl algebra, Xi ↦ (R,T,D,S)i, ∂i ↦ (HD,HS,−HR,−HT)i, with proved defining relations and non-surjectivity. Needs W01–W09. Polynomial identities alone do not prove this result. |
 
 ## Supporting obligations and dependency order
@@ -93,9 +93,9 @@ and reported software timings are outside mathematical formalization.
 | J04 | PROVED | `Symplectic.preserves_of_generators` proves all-polynomial preservation for any algebra homomorphism from its generator identities. `poisson_iff_canonical`, `canonical_iff_six`, `poisson_iff_symplectic`, and their explicit complex wrappers assemble the general criterion. | P02, J03 |
 | J05 | PROVED | `Core.core_det_rational` identifies the actual 3×3 Matrix.det with the original expanded `jac3` certificate. `core_det_charZero K` commutes coefficient mapping with partial differentiation and determinants to prove the same polynomial identity over K. | D02 |
 | J06 | MISSING | Localized core source/target determinant factors and point-map factorization σ∘(G×id)∘Ψ. May be replaced by direct determinant proof, with correspondence documented. | S04, J05, D03 |
-| N01 | MISSING | Canonical bracket on n pairs with variable order and embedding of the four original coordinates explicit; bracket laws. | P02 (proof route) |
-| N02 | MISSING | For every n≥2 extend Φ by identity on remaining pairs and prove global bracket preservation. | N01, P03, B01 |
-| N03 | MISSING | Extend the displayed collision to n pairs and prove nonautomorphism of the algebra map. This can replace the paper's irreducibility argument. | N02, B02, F03 |
+| N01 | PROVED | `HigherRank.canonicalBracket K n` is exactly the sum over n pairs of fpᵢ gxᵢ − fxᵢ gpᵢ. `canonical_px`, `canonical_xx`, `canonical_pp` verify the generator convention. `bracket` on the split variables has proved additivity, constant and Leibniz laws. `coordinateEquiv` identifies those variables with Fin (2+m) × Fin 2; `coordinate_zero/one/two/three/extra` fix the original (x,q,p,z) and extra pairs explicitly, and `reindex_bracket` proves bracket correspondence on all polynomials. | P02 (proof route) |
+| N02 | PROVED | `HigherRank.Phi` extends ΦK by identity on m additional pairs. `Phi_preserves` proves all-polynomial preservation by two inductions. `standardPhi` conjugates by the proved variable-reindexing equivalence; `standardPhi_preserves`, `standardPhi_X`, `standardPhi_X_extra` prove canonical bracket preservation and the exact generator images, including identity on every added pair. `every_rank` handles all n≥2 by n=2+m, including m=0. | N01, P03, B01 |
+| N03 | PROVED | `extended_collision` and `extended_points_distinct` extend the original two points by zeros. `pointMap_of_surjective_injective` works on any variable type and proves that surjectivity of a polynomial algebra homomorphism forces point-map injectivity. `Phi_not_surjective`, `Phi_not_automorphism` and their `standardPhi_*` counterparts yield the every-rank result. `base_not_surjective` also strengthens the original ΦK result. This evaluation argument replaces irreducibility without weakening the conclusion. | N02, B02, F03 |
 | W01 | MISSING | Actual fourth Weyl algebra over C with generators Xi,∂i and the stated universal defining relations; polynomial representation. | noncommutative algebra infrastructure |
 | W02 | MISSING | Hamiltonian derivations HD,HS,−HR,−HT as elements of that algebra; δi(fj)=δij. | W01, B01 |
 | W03 | MISSING | [HF,HG]=H{F,G} and commutation of δi; multiplication operators fi commute. | P04, W01, W02 |
@@ -111,14 +111,14 @@ and reported software timings are outside mathematical formalization.
 - Lean `4.32.1`, compiler commit `f054605aea4b840552cca2e725580bffd1e1b704`.
 - mathlib `v4.32.1`, revision `520045ab14e26149ee970e2e617ca04b09bde5d6`;
   all nine dependency revisions match `lake-manifest.json`.
-- `lake build`: passed, 8,671 jobs. CI rebuilds every project module from source.
+- `lake build`: passed, 8,672 jobs. CI rebuilds every project module from source.
   The 86 existing warnings concern unused simp arguments, tactic style and section variables;
   there are no build errors. Pinned dependency caches are reused.
-- `python3 scripts/audit_sources.py`: passed for 19 Lean files and all sixteen
-  library modules (fifteen mathematical files plus umbrella). All 12 named results
+- `python3 scripts/audit_sources.py`: passed for 20 Lean files and all seventeen
+  library modules (sixteen mathematical files plus umbrella). All 12 named results
   have ledger entries; the 53 supporting obligations have acyclic dependencies.
-- `lake env lean scripts/AxiomAudit.lean`: passed for all 533 declarations
-  originating in project modules, including 399 theorem constants and all
+- `lake env lean scripts/AxiomAudit.lean`: passed for all 606 declarations
+  originating in project modules, including 458 theorem constants and all
   private/generated declarations. Every transitive axiom set is contained in
   `{propext, Classical.choice, Quot.sound}`. Current output is
   [`scripts/axiom-audit.txt`](scripts/axiom-audit.txt).
@@ -141,7 +141,8 @@ and reported software timings are outside mathematical formalization.
 3. Close the remaining localized core and point-map factorization claims J06.
    The induced bracket, Casimir property, source form, four-dimensional Jacobian,
    and general symplectic criterion are proved.
-4. Higher rank construction and proof.
+4. Maintain the proved every-rank construction, canonical coordinate correspondence,
+   and stronger non-surjectivity conclusions.
 5. Weyl presentation, Hamiltonian relations, actual endomorphism and
    non-surjectivity; assess PBW/model-correspondence requirements explicitly.
 6. Close remaining substantive support claims and run a final full statement
