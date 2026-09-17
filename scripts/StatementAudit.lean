@@ -74,3 +74,20 @@ This supplements the whole-module axiom audit; it adds no mathematical facts. -/
 #check RankTwoPoisson.HigherRank.every_rank
 #check RankTwoPoisson.HigherRank.base_not_surjective
 #check RankTwoPoisson.HigherRank.every_rank ℂ
+
+#check RankTwoPoisson.Weyl.lift
+#check RankTwoPoisson.Weyl.polynomial_injective
+#check RankTwoPoisson.Weyl.hamiltonian_commutator
+#check RankTwoPoisson.Weyl.hamiltonian_polynomial
+#check RankTwoPoisson.Weyl.delta_tuple
+#check RankTwoPoisson.Weyl.delta_commute
+#check RankTwoPoisson.Weyl.delta_output
+#check RankTwoPoisson.Weyl.endomorphism_X
+#check RankTwoPoisson.Weyl.endomorphism_deriv
+#check RankTwoPoisson.Weyl.representation_intertwining
+#check RankTwoPoisson.Weyl.endomorphism_not_surjective
+#check RankTwoPoisson.Weyl.explicit_counterexample_complex
+#print RankTwoPoisson.Weyl.Relation
+#print RankTwoPoisson.Weyl.Algebra
+#print RankTwoPoisson.Weyl.hCoefficients
+#print RankTwoPoisson.Weyl.endomorphism

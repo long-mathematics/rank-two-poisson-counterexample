@@ -1,4 +1,4 @@
-Axiom audit passed: 17 modules, 606 declarations, 458 theorem constants.
+Axiom audit passed: 19 modules, 710 declarations, 534 theorem constants.
 All transitive dependencies lie in {propext, Classical.choice, Quot.sound}.
 'RankTwoPoisson.explicit_counterexample' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RankTwoPoisson.explicit_counterexample_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -46,3 +46,15 @@ All transitive dependencies lie in {propext, Classical.choice, Quot.sound}.
 'RankTwoPoisson.HigherRank.standardPhi_not_surjective' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RankTwoPoisson.HigherRank.every_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RankTwoPoisson.HigherRank.base_not_surjective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Weyl.lift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Weyl.polynomial_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Weyl.hamiltonian_commutator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Weyl.hamiltonian_polynomial' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Weyl.delta_tuple' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Weyl.delta_commute' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Weyl.delta_output' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Weyl.endomorphism_X' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Weyl.endomorphism_deriv' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Weyl.representation_intertwining' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Weyl.endomorphism_not_surjective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Weyl.explicit_counterexample_complex' depends on axioms: [propext, Classical.choice, Quot.sound]

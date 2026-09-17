@@ -41,7 +41,7 @@ all named theorem/lemma/proposition/corollary environments in the manuscript.
 | `prop:not-automorphism` | PROVED | `Phi_not_automorphism`, `PhiC_not_automorphism`, `PhiK_not_automorphism K` prove algebra-map nonautomorphism using explicit collisions and evaluation of an inverse algebra equivalence (F01–F05, B02–B03). This substitutes for the paper's prime-ideal/CRT argument. |
 | `prop:exact-fiber` | PROVED | `Fiber.exact_fiber_complex`: for every v : Fin 4 → ℂ, pointMapC PhiC v = targetC iff v = point0C ∨ v = point1C ∨ v = complexPoint point2. `Fiber.exact_fiber_charZero` proves the same over K; `Fiber.exact_fiber_rational` covers Q. `Fiber.fiber_points_distinct` proves all three points differ. Dependencies F06–F09, S03, B02; the separate Gröbner/scheme certificate F10 is not needed. |
 | `cor:all-poisson-ranks` | PROVED | `HigherRank.every_rank K n hn` constructs a canonical-bracket-preserving, non-surjective and nonautomorphic algebra endomorphism of MvPolynomial (Fin n × Fin 2) K for every n with hn : 2 ≤ n. K only requires Field and CharZero, hence includes C. Position/momentum have second index 0/1; `canonical_px`, `canonical_xx`, `canonical_pp` prove the manuscript convention. N01–N03. |
-| `thm:explicit-DC4` | MISSING | Actual C-algebra endomorphism of the fourth Weyl algebra, Xi ↦ (R,T,D,S)i, ∂i ↦ (HD,HS,−HR,−HT)i, with proved defining relations and non-surjectivity. Needs W01–W09. Polynomial identities alone do not prove this result. |
+| `thm:explicit-DC4` | PROVED | `Weyl.explicit_counterexample_complex` constructs the actual C-algebra endomorphism of the universal fourth Weyl algebra, with Xi ↦ (R,T,D,S)i and ∂i ↦ (HD,HS,−HR,−HT)i. It proves non-surjectivity and absence of an AlgEquiv with that underlying homomorphism, with no mathematical hypotheses. `delta_tuple` fixes the derivative order and signs. `explicit_counterexample K` gives the same result over every characteristic-zero field. The polynomial-action intertwining argument replaces the filtration argument; see MANUSCRIPT_MAP.md. Dependencies W01–W04, W08; W05–W07 and full faithfulness W09 are separate support obligations, not assumed. |
 
 ## Supporting obligations and dependency order
 
@@ -96,29 +96,29 @@ and reported software timings are outside mathematical formalization.
 | N01 | PROVED | `HigherRank.canonicalBracket K n` is exactly the sum over n pairs of fpᵢ gxᵢ − fxᵢ gpᵢ. `canonical_px`, `canonical_xx`, `canonical_pp` verify the generator convention. `bracket` on the split variables has proved additivity, constant and Leibniz laws. `coordinateEquiv` identifies those variables with Fin (2+m) × Fin 2; `coordinate_zero/one/two/three/extra` fix the original (x,q,p,z) and extra pairs explicitly, and `reindex_bracket` proves bracket correspondence on all polynomials. | P02 (proof route) |
 | N02 | PROVED | `HigherRank.Phi` extends ΦK by identity on m additional pairs. `Phi_preserves` proves all-polynomial preservation by two inductions. `standardPhi` conjugates by the proved variable-reindexing equivalence; `standardPhi_preserves`, `standardPhi_X`, `standardPhi_X_extra` prove canonical bracket preservation and the exact generator images, including identity on every added pair. `every_rank` handles all n≥2 by n=2+m, including m=0. | N01, P03, B01 |
 | N03 | PROVED | `extended_collision` and `extended_points_distinct` extend the original two points by zeros. `pointMap_of_surjective_injective` works on any variable type and proves that surjectivity of a polynomial algebra homomorphism forces point-map injectivity. `Phi_not_surjective`, `Phi_not_automorphism` and their `standardPhi_*` counterparts yield the every-rank result. `base_not_surjective` also strengthens the original ΦK result. This evaluation argument replaces irreducibility without weakening the conclusion. | N02, B02, F03 |
-| W01 | MISSING | Actual fourth Weyl algebra over C with generators Xi,∂i and the stated universal defining relations; polynomial representation. | noncommutative algebra infrastructure |
-| W02 | MISSING | Hamiltonian derivations HD,HS,−HR,−HT as elements of that algebra; δi(fj)=δij. | W01, B01 |
-| W03 | MISSING | [HF,HG]=H{F,G} and commutation of δi; multiplication operators fi commute. | P04, W01, W02 |
-| W04 | MISSING | Construct actual endomorphism widehatΦ using the universal property and all Weyl relations; verify generator images. | W02, W03 |
+| W01 | PROVED | `Weyl.Algebra K` is the quotient of the free associative algebra on Var⊕Var by `Relation`: XX and ∂∂ commute, and ∂i Xj = Xj ∂i + δij. `lift`, `lift_X`, `lift_deriv`, `hom_ext` prove its universal property. `polynomial_injective` embeds the polynomial coordinates, and `representation` constructs their differential-operator action. These results require only Field K. Full operator faithfulness is W09. | — |
+| W02 | PROVED | `Weyl.hamiltonian K f` is the actual Weyl element with coefficients (fp,fz,−fx,−fq). `representation_hamiltonian` identifies its action with the canonical bracket. `delta_tuple` proves (δ0,δ1,δ2,δ3)=(HD,HS,−HR,−HT); `dual_output` gives δi(fj)=δij over K. Indices 0–3 correspond to the manuscript indices 1–4. | W01, B01 |
+| W03 | PROVED | `Weyl.hamiltonian_commutator` proves [Hf,Hg]=H{f,g} inside the presented algebra over any field, using `vectorField_commutator` and mixed-partial commutation. `hamiltonian_polynomial` proves [Hf,poly g]=poly {f,g}. `delta_commute` proves all derivative images commute and `polynomial_commute` all multiplication images commute. `delta_output` proves every mixed Weyl relation over K. | P04, W01, W02 |
+| W04 | PROVED | `Weyl.endomorphism K` is the actual algebra homomorphism supplied by the proved universal property. `endomorphism_X` and `endomorphism_deriv` identify every generator image; `endomorphism_polynomial` identifies its restriction with the original polynomial substitution. | W02, W03 |
 | W05 | MISSING | Polynomial substitution ΦC is injective / fi are algebraically independent, via invertible formal Jacobian or canonical derivations. | J01 or W02 |
 | W06 | MISSING | Weyl PBW basis, differential-order filtration, associated graded C[X,ξ], and principal-symbol formulas. These support the manuscript route; an equivalent non-surjectivity argument may avoid them. | W01 |
 | W07 | MISSING | A Jfᵀ=I and A invertible; symbol monomials η^β independent; no cancellation of highest differential order. | J01, W02, W05, W06 |
-| W08 | MISSING | Prove non-surjectivity of the actual Weyl endomorphism, then nonautomorphism, without assuming either. Investigate alternative: the image operators preserve C[f] and send 1 into C[f]; surjectivity would force every multiplication polynomial into C[f], contradicting the collision. | W04, B02; manuscript route also W05–W07 |
-| W09 | MISSING | Correspondence of quotient/universal Weyl construction to the manuscript differential-operator model; faithfulness/PBW if needed by the chosen route. | W01, W06 |
+| W08 | PROVED | `Weyl.dual_intertwining` proves δi(Φg)=Φ(∂i g). `representation_intertwining` extends this to every Weyl element via free-algebra induction and quotient surjectivity. `endomorphism_not_surjective` applies it to 1: a preimage of every multiplication polynomial would make Φ surjective, contradicting `HigherRank.base_not_surjective`. `endomorphism_not_automorphism` and `explicit_counterexample_complex` give the exact conclusion over K/C. No PBW, faithfulness, output algebraic independence or missing conclusion is assumed. | W04, N03 |
+| W09 | PARTIAL | `Weyl.representation` constructs the polynomial differential-operator action with the exact generator correspondence, and `representation_polynomial` identifies all multiplication operators. Full faithfulness of this action, hence equivalence with the manuscript operator model, is still missing. The universal-presentation endomorphism and W08 do not require it. | W01, W06 |
 
 ## Fresh validation
 
 - Lean `4.32.1`, compiler commit `f054605aea4b840552cca2e725580bffd1e1b704`.
 - mathlib `v4.32.1`, revision `520045ab14e26149ee970e2e617ca04b09bde5d6`;
   all nine dependency revisions match `lake-manifest.json`.
-- `lake build`: passed, 8,672 jobs. CI rebuilds every project module from source.
+- `lake build`: passed, 8,674 jobs. CI rebuilds every project module from source.
   The 86 existing warnings concern unused simp arguments, tactic style and section variables;
   there are no build errors. Pinned dependency caches are reused.
-- `python3 scripts/audit_sources.py`: passed for 20 Lean files and all seventeen
-  library modules (sixteen mathematical files plus umbrella). All 12 named results
+- `python3 scripts/audit_sources.py`: passed for 22 Lean files and all nineteen
+  library modules (eighteen mathematical files plus umbrella). All 12 named results
   have ledger entries; the 53 supporting obligations have acyclic dependencies.
-- `lake env lean scripts/AxiomAudit.lean`: passed for all 606 declarations
-  originating in project modules, including 458 theorem constants and all
+- `lake env lean scripts/AxiomAudit.lean`: passed for all 710 declarations
+  originating in project modules, including 534 theorem constants and all
   private/generated declarations. Every transitive axiom set is contained in
   `{propext, Classical.choice, Quot.sound}`. Current output is
   [`scripts/axiom-audit.txt`](scripts/axiom-audit.txt).
@@ -143,10 +143,24 @@ and reported software timings are outside mathematical formalization.
    and general symplectic criterion are proved.
 4. Maintain the proved every-rank construction, canonical coordinate correspondence,
    and stronger non-surjectivity conclusions.
-5. Weyl presentation, Hamiltonian relations, actual endomorphism and
-   non-surjectivity; assess PBW/model-correspondence requirements explicitly.
+5. Complete the remaining Weyl support claims: output algebraic independence,
+   PBW/order filtration, symbol independence, and full operator faithfulness.
+   The universal-presentation endomorphism and non-surjectivity use a separate
+   polynomial-action proof; they do not discharge these supporting statements.
 6. Close remaining substantive support claims and run a final full statement
    correspondence and transitive-axiom audit before claiming complete coverage.
 
 No substantive mathematical error has been identified in the inspected Lean
 statements. This is not a certification of the manuscript's missing results.
+
+## Remaining Weyl infrastructure
+
+The pinned library has no Weyl-algebra/PBW development to instantiate. W06
+needs a normal-form basis indexed by pairs of exponent vectors, an order
+filtration and its associated-graded identification. W09 needs injectivity of
+`Weyl.representation` on all presented elements, beyond the proved polynomial
+embedding. A direct operator-action argument was investigated and supplies W08
+without either missing result. It does not prove PBW or faithfulness. W05 still
+requires a minimal-degree relation argument (including the partial-derivative
+zero/degree lemmas), or an equivalent algebraic-independence criterion. W07
+must additionally formalize the coefficient-matrix identity and symbol claims.

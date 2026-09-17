@@ -84,3 +84,16 @@ run_cmd do
 #print axioms RankTwoPoisson.HigherRank.standardPhi_not_surjective
 #print axioms RankTwoPoisson.HigherRank.every_rank
 #print axioms RankTwoPoisson.HigherRank.base_not_surjective
+
+#print axioms RankTwoPoisson.Weyl.lift
+#print axioms RankTwoPoisson.Weyl.polynomial_injective
+#print axioms RankTwoPoisson.Weyl.hamiltonian_commutator
+#print axioms RankTwoPoisson.Weyl.hamiltonian_polynomial
+#print axioms RankTwoPoisson.Weyl.delta_tuple
+#print axioms RankTwoPoisson.Weyl.delta_commute
+#print axioms RankTwoPoisson.Weyl.delta_output
+#print axioms RankTwoPoisson.Weyl.endomorphism_X
+#print axioms RankTwoPoisson.Weyl.endomorphism_deriv
+#print axioms RankTwoPoisson.Weyl.representation_intertwining
+#print axioms RankTwoPoisson.Weyl.endomorphism_not_surjective
+#print axioms RankTwoPoisson.Weyl.explicit_counterexample_complex
