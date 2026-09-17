@@ -18,24 +18,46 @@
   `python -m unittest discover -s scripts -p 'test_*.py'` and
   `python scripts/check_verification.py`.
 - Do not silently regenerate expected outputs to make tests pass.
-- The four migrated scripts and outputs are provenance-preserved. A future repair
-  must be explicit and separately reviewed.
+- Repairs to the four exact verifiers or their reference outputs must be explicit
+  and separately reviewed.
 - Computational identity checks are not full manuscript or Lean certification.
 
-## Lean import
+## Lean formalization
 
-- Read `FORMALIZATION_STATUS.md`. There are no Lean sources in the initial migration.
-- Preserve the existing local formalization, namespace, declaration names and
-  toolchain pins when importing. Verify before attempting upgrades.
+- Read `FORMALIZATION_STATUS.md` and `MANUSCRIPT_MAP.md`; coverage is partial.
+- Preserve existing mathematical declarations and toolchain pins. Verify before
+  upgrades; never modify a separate original source directory.
 - Use a root Lake project and `RankTwoPoisson/` mathematical modules.
 - Place auxiliary Lean audits under `scripts/`; import every mathematical module
   through the library's build targets.
 - Never introduce `sorry`, `admit`, custom axioms, or hypotheses that assume
   the conclusion. Audit transitive dependencies, not just source keywords.
-- Distinguish proved, unverified, and missing obligations in the manuscript ledger.
+- Run `lake build`, `python3 scripts/audit_sources.py`, and
+  `lake env lean scripts/AxiomAudit.lean`. The audit permits only `propext`,
+  `Classical.choice`, and `Quot.sound`, across all project-module declarations.
+- Run `lake env lean scripts/StatementAudit.lean` when reviewing correspondence.
+- Distinguish proved, partial, unverified, and missing obligations in the ledger.
+  Preserve exact hypotheses and record dependencies and justified alternate routes.
+- Extend coverage in focused PRs. Cover all named results
+  and substantive support claims, including exact fibers, symplectic/Jacobian
+  consequences, higher ranks, and an actual Weyl-algebra endomorphism with proved
+  non-surjectivity. Computational checks are not Lean proofs.
+- If an obligation is blocked, record the exact missing lemma/infrastructure and
+  investigated approaches, then continue independent tractable obligations.
+- No full-paper completion claim before final statement and transitive-axiom audits.
 
 ## Git workflow
 
 Use a feature branch, pull request, successful applicable CI, and squash merge.
 Never bypass protections, force-push main, or delete source material before
 the destination is accepted. Record checks actually run and any blockers.
+
+## Documentation
+
+Keep this tree a current paper-and-Lean companion, not a development archive.
+README covers the abstract, paper links, current coverage, reproducible checks,
+citation and license. The ledger records current statements, dependencies,
+remaining obligations and verification results. Do not add local source paths,
+migration narratives, old drafts, redundant historical documents or obsolete
+build logs. Preserve unique proof material, current certificates, dependency pins,
+required notices and Git history.
