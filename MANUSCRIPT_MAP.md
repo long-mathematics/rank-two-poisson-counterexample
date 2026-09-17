@@ -18,6 +18,9 @@ The exact claim/hypothesis/dependency/status ledger is
 | `RankTwoPoisson/Symplectic.lean` | General symplectic criterion, actual 4×4 Jacobian and form preservation, bundled main theorem |
 | `RankTwoPoisson/SourceEquivalence.lean` | Actual source and corrected algebra equivalences over K, explicit inverses, core substitution, algebraic independence, and source Jacobians |
 | `RankTwoPoisson/PoissonCalculus.lean` | Mixed partials, Jacobi identity, and Hamiltonian derivation commutators |
+| `RankTwoPoisson/InducedBracket.lean` | All-polynomial induced negative-Jacobian bracket over K, Casimir R, and separate D₀/R and H/R identities |
+| `RankTwoPoisson/DerivativeCertificate.lean` | Appendix A: all first derivatives and three expanded coefficient expressions |
+| `RankTwoPoisson/SourceForms.lean` | All source differential and two-form coefficients, including ω=dR∧dD₀+Θ |
 | `RankTwoPoisson/CoreGeometry.lean` | Actual 3×3 core Jacobian over Q/K and complete residual form coefficient matrix |
 
 The umbrella imports every mathematical layer, including the source-equivalence and
@@ -54,3 +57,11 @@ H. Both full source Jacobians are differentiated directly and coefficientwise
 transported to K, giving the same determinant −1 as the triangular argument.
 `PoissonCalculus` supplies Jacobi and equality of Hamiltonian commutators as
 actual derivations; these results alone do not construct a Weyl endomorphism.
+
+The induced bracket is first defined explicitly as a biderivation in the three
+independent variables. Two polynomial inductions identify it with the ambient
+bracket on the full source-coordinate subalgebra; the negative determinant
+formula is proved for arbitrary f,g, not only the three generators. The appendix
+derivative certificates state the complete displayed lists, while `SourceForms`
+represents one-forms by all four coefficients and two-forms by all sixteen
+alternating entries, in independent order (X,Y,W,E₀).

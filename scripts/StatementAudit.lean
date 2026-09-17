@@ -53,3 +53,14 @@ This supplements the whole-module axiom audit; it adds no mathematical facts. -/
 #check RankTwoPoisson.SourceCoordinates.corrected_det_charZero
 #check RankTwoPoisson.Calculus.jacobi
 #check RankTwoPoisson.Calculus.hamiltonian_commutator
+
+#check RankTwoPoisson.Induced.source_bracket_determinant
+#check RankTwoPoisson.Induced.source_casimir
+#check RankTwoPoisson.Induced.D0_R_charZero
+#check RankTwoPoisson.Induced.H_R_charZero
+#check RankTwoPoisson.Core.DerivativeCertificate.r_derivatives
+#check RankTwoPoisson.Core.DerivativeCertificate.s_derivatives
+#check RankTwoPoisson.Core.DerivativeCertificate.t_derivatives
+#check RankTwoPoisson.Core.DerivativeCertificate.h_derivatives
+#check RankTwoPoisson.Core.DerivativeCertificate.expanded_coefficients
+#check RankTwoPoisson.SourceCoordinates.Forms.omega_split_charZero

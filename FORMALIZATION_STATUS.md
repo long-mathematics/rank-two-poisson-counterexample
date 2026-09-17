@@ -32,12 +32,12 @@ all named theorem/lemma/proposition/corollary environments in the manuscript.
 | --- | --- | --- |
 | `thm:main` | PROVED | `Symplectic.main_complex` bundles global bracket preservation, algebra-map nonautomorphism, the actual four-dimensional Jacobian determinant one, the exhaustive fiber iff for every complex point, and pairwise distinctness of its three points. It has no mathematical hypotheses. Dependencies P01–P03, B01–B03, F01–F09, J01. The original rational and arbitrary-characteristic-zero counterexamples are preserved. |
 | `lem:symplectic-criterion` | PROVED | For arbitrary F : Fin 4 → PC, `Symplectic.criterion_complex` equates IsPoissonC (aeval F) with Jᵀ Ω J = Ω; `six_criterion_complex` equates it with the six displayed brackets; `det_of_poisson_complex` gives det J = 1. `form_entry` proves that this matrix equation is exactly the pullback two-form coefficient identity. No relations on F are assumed in either iff. Dependencies J03–J04. |
-| `lem:R-factorization` | PROVED | `R_factorization : R = x * (2 - 3*x*q)` over Q, with no hypotheses. Exact definitions D01. Explicit complex wrapper missing. |
+| `lem:R-factorization` | PROVED | `R_factorization : R = x * (2 - 3*x*q)` over Q, with no hypotheses. `Induced.R_factorization_charZero K` proves the actual coefficient-extended identity over every K, hence C. Exact definitions D01. |
 | `prop:source-automorphism` | PROVED | `SourceCoordinates.sourceEquivK K` and `correctedEquivK K` are actual polynomial algebra equivalences over every K, hence C; `sourceEquivK_X`/`correctedEquivK_X` identify their forward coordinates, and both `*_symm_X` theorems identify their explicit inverses (the corrected inverse substitutes the fourth coordinate minus the independent core H). `source_det_charZero` and `corrected_det_charZero` prove the actual 4×4 determinants −1. S01–S05. |
 | `prop:coefficient-identity` | PROVED | `Core.coefficient_identity_matrix` proves every coefficient of dr∧dh+dt∧ds equals Θ, represented by `Core.residualForm` in basis (dx,dy,dβ), over Q. It uses the original `Core.coefficient_identity` and proved wedge alternation. This is a coordinate representation of the full form equality, not an assumed differential-form law. D02, A02. |
 | `thm:poisson-identities` | PROVED | `six_brackets`, `Phi_isPoisson`, and scalar-extension counterparts prove the six identities and all-polynomial preservation. `Symplectic.output_det_rational`, `output_det_complex`, and `output_det K` prove the actual 4×4 determinant consequence over Q/C/K. Dependencies D01, P01–P03, B01, J01. |
 | `prop:core-jacobian` | PROVED | `Core.core_det_rational` identifies the original `Core.core_jacobian` certificate with Matrix.det of rows (r,t,s), columns (x,y,β). `Core.core_det_charZero K` transports the determinant identity to every characteristic-zero field, including C. No extra hypotheses. D02, J05. |
-| `prop:induced-bracket` | MISSING | Canonical bracket restricted to C[x,y,β] equals −det ∂(R,f,g)/∂(x,y,β) for all f,g; induced generator brackets and Casimir property. Needs S04, I01–I03. Specific output bracket consequences are P01. |
+| `prop:induced-bracket` | PROVED | `Induced.source_bracket_determinant K f g` proves the ambient bracket of the two core-substituted polynomials equals the substitution of −det ∂(r3,f,g)/∂(x,y,β), for all independent core polynomials over K, hence C. `r3_map` and D03 identify r3 with R; S04 establishes the subalgebra coordinates are independent. `source_generators` proves all nine generator entries and `source_casimir` the Casimir property. The particular S,T consequences are P01/B01. I01–I03. |
 | `prop:not-automorphism` | PROVED | `Phi_not_automorphism`, `PhiC_not_automorphism`, `PhiK_not_automorphism K` prove algebra-map nonautomorphism using explicit collisions and evaluation of an inverse algebra equivalence (F01–F05, B02–B03). This substitutes for the paper's prime-ideal/CRT argument. |
 | `prop:exact-fiber` | PROVED | `Fiber.exact_fiber_complex`: for every v : Fin 4 → ℂ, pointMapC PhiC v = targetC iff v = point0C ∨ v = point1C ∨ v = complexPoint point2. `Fiber.exact_fiber_charZero` proves the same over K; `Fiber.exact_fiber_rational` covers Q. `Fiber.fiber_points_distinct` proves all three points differ. Dependencies F06–F09, S03, B02; the separate Gröbner/scheme certificate F10 is not needed. |
 | `cor:all-poisson-ranks` | MISSING | For every n ≥ 2, construct a bracket-preserving nonautomorphic endomorphism on 2n polynomial variables over C. Needs N01–N03; no rank restriction may be assumed away. |
@@ -55,16 +55,18 @@ and reported software timings are outside mathematical formalization.
 | D01 | PROVED | Exact Q definitions `a,B,beta,y,u,R,S,T,D0,H,D,bracket,output,Phi` match construction equations; bracket is fp gx − fx gp + fz gq − fq gz; output order (R,T,D,S). | — |
 | D02 | PROVED | `Core.r,s,t,h,Q3,A1,A2,A3,wedgeCoeff,jac3` match independent-variable construction and determinant expansion over Q. | D01 (correspondence) |
 | D03 | PROVED | `SourceCoordinates.core_substitution` identifies the core substitution algebra homomorphism on r,t,s,h with R,T,S,H over Q; `core_substitution_charZero` proves all four polynomial equalities after coefficient extension to K. `Fiber.eval_r`, `eval_s`, `eval_t`, `eval_h` give the scalar evaluation versions. | D01, D02 |
-| D04 | MISSING | Reported expanded term counts/degrees of β,y,R,S,T,H,D and correspondence to the announced normalized core. | D01, D02 |
+| D04 | MISSING | Reported expanded term counts and total degrees of β,y,R,S,T,H,D as kernel-checked polynomial facts. | D01 |
+| D05 | MISSING | Announced map (Π,Σ,ℛ): normalization G=(ℛ,−Π/2,Σ), actual Jacobian determinant −2, and common image (−1/4,0,0) of the displayed three points. | D02, J05, F08 |
+| D06 | MISSING | Introductory cotangent lift of the announced map: polynomial inverse-transpose Jacobian, canonical one-form preservation, zero-section collision, and resulting counterexample on three canonical pairs. This is a separate construction from the higher-rank identity extension N02. | D05 |
 | S01 | PROVED | `SourceCoordinates.source_block_det`: 2×2 block determinant equals −1, as a Q polynomial identity. | D01 |
 | S02 | PROVED | `SourceCoordinates.inverse_certificate`: βBack=p, yBack=q, D0Back=z in independent inverse coordinates. | D01 |
 | S03 | PROVED | `SourceCoordinates.two_sided_inverse_certificate`: S02 and Qorig=q, pRecovered=p, zRecovered=z. x is unchanged. | S02 |
 | S04 | PROVED | `SourceCoordinates.sourceEquivK` and `correctedEquivK` bundle Ψ₀ and Ψ as algebra equivalences over K; `*_X` identify the forward images and `*_symm_X` the explicit inverse images, including D−H. `source_algebraicIndependent` proves algebraic independence of x,y,β over K by restricting the transported independent polynomial generators. | S03, D03 |
 | S05 | PROVED | `source_det_rational`, `corrected_det_rational`, `source_det_charZero`, `corrected_det_charZero` prove full Matrix.det Jacobians equal −1 in order (x,q,p,z). The shear algebra equivalence `shearEquiv` has explicit inverse; determinant proofs directly differentiate the actual maps, replacing the manuscript’s triangular determinant argument. | S04 |
-| A01 | MISSING | Appendix derivative formulas for all first partials of r,s,t,h, including P₁′ and P₂′. Existing proofs unfold derivatives internally; they do not export this list. | D02 |
+| A01 | PROVED | `Core.DerivativeCertificate.r_derivatives`, `s_derivatives`, `t_derivatives`, `h_derivatives` give all twelve first partials over Q in order (x,y,β). `P1_derivative`, `P2_derivative`, and the four evaluation lemmas identify P₁,P₂ and their derivatives exactly with the auxiliary appendix expressions. | D02 |
 | A02 | PROVED | `Core.coefficient_identity` proves the three independent wedge coefficients; `Core.coefficient_identity_matrix` proves all nine entries against `residualForm`, using wedge skew symmetry and zero diagonal. The private coefficient proofs are included transitively. | D02 |
-| A03 | MISSING | Appendix's three expanded coefficient expressions and equality with A₁,A₂,A₃. | A01, A02 |
-| A04 | MISSING | Source differential formulas for dQ,dp,dz; ω = dR∧dD₀ + Θ in source coordinates. | S04, D03 |
+| A03 | PROVED | `Core.DerivativeCertificate.expanded_coefficients` states and proves all three displayed collected expressions, identifying them with A₁,A₂,A₃ through the original coefficient certificate. | A01, A02 |
+| A04 | PROVED | `SourceCoordinates.Forms.dQ`, `dC`, `dM`, `dp`, `dz`, `dR`, `d_p_first`, `d_p_second` prove every one-form coefficient of the source calculation over Q. `omega_Q_coefficient`, `omega_Q`, and `omega_split` give the intermediate coefficient and complete alternating two-form arrays. `omega_split_charZero K` proves the actual differentiated form equality over K, hence C. The independent order is (X,Y,W,E₀); Θ is padded by a zero fourth row/column. | S04, D03 |
 | P01 | PROVED | Six exact Q brackets: `bracket_D_R`, `bracket_S_T` = 1 and `bracket_R_S`, `bracket_R_T`, `bracket_D_S`, `bracket_D_T` = 0; bundled `six_brackets`. No assumed identities. | D01 |
 | P02 | PROVED | `bracket_skew`, `bracket_self`, constant/additive/Leibniz laws; `bracket_X_X`, `bracket_output_output`. | D01, P01 |
 | P03 | PROVED | `Phi_generator_bracket`, `Phi_preserves_right_generator`, `Phi_isPoisson`: two polynomial inductions establish ∀f g, {Φf,Φg}=Φ{f,g}. | P02 |
@@ -82,9 +84,9 @@ and reported software timings are outside mathematical formalization.
 | F08 | PROVED | `Core.corePoint0_image`, `corePoint1_image`, `corePoint2_image`: three rational core memberships, no exhaustiveness. | D02 |
 | F09 | PROVED | `Fiber.hValue_points` proves H=−1/48,−1097/192,−1097/192 on the core fiber. `recover_q`, `recover_p`, `recover_z`, `source_injective` transfer the original inverse certificates to K; `exact_fiber_charZero`, `exact_fiber_complex`, `exact_fiber_rational` exhaust the actual four-dimensional fiber. All three distinctness statements are `fiber_points_distinct`. | F06, S03, D03, B02 |
 | F10 | MISSING | Gröbner certificate: equality of the fiber ideal with (β−(27x²−1)/4, y+3x/2, x(x−1)(x+1)); reduced fiber scheme. | F06 or explicit ideal identities |
-| I01 | MISSING | Induced generator brackets {x,y}=x³, {x,β}=−3x², {y,β}=−2+6xy+3x²β. | D01 |
-| I02 | MISSING | Induced bracket formula for all polynomials in x,y,β, not just generators; R is Casimir on that subalgebra. | I01, S04, P02 |
-| I03 | MISSING | {D₀,R}=1 and {H,R}=0 as separate statements; specific {D,R}=1 already P01. | I02, D01 |
+| I01 | PROVED | `Induced.generators_rational` proves {x,y}=x³, {x,β}=−3x², {y,β}=−2+6xy+3x²β. `source_generators K` transports these to all nine generator entries over K. `ambient_support` exports βp, βz and {q,β} from the manuscript derivation. | D01 |
+| I02 | PROVED | `Induced.source_bracket` uses two polynomial inductions to identify the ambient bracket on the entire source subalgebra. `determinant_formula` identifies it with the negative 3×3 Jacobian; `source_bracket_determinant` combines the two for all f,g over K. `casimir`, `r3_map`, and `source_casimir` prove that the actual R is a Casimir. | I01, S04, P02 |
+| I03 | PROVED | `Induced.D0_R_rational`, `D0_R_charZero` prove {D₀,R}=1 over Q/K; `H_R_charZero` proves {H,R}=0 over K, hence C, using the full subalgebra Casimir result and the proved core-H substitution. | I02, D01 |
 | J01 | PROVED | `Symplectic.output_det K`, `output_det_complex`, `output_det_rational`: Matrix.det of the actual formal Jacobian with rows (R,T,D,S), columns (x,q,p,z), equals 1. `jacobian` and `jacobian_pair` fix the coordinate and bracket conventions. | P01, B01, J03 |
 | J02 | PROVED | `Symplectic.output_symplectic K`, `output_symplectic_complex` prove Jᵀ Ω J=Ω. `output_form_coefficients` spells out every coefficient of dR∧dD+dT∧dS = dx∧dp+dq∧dz, with Ω explicitly defined by `omega`. | P01, B01, J03 |
 | J03 | PROVED | `Symplectic.conjugate_iff` proves the equivalence of primal/dual form identities for inverse matrices U,V; `omega_mul_neg` and `neg_mul_omega` prove the actual inverse identities Ω⁻¹=−Ω. `det_pair` proves the signed 4×4 contraction formula over any commutative ring, giving determinant +1. | — |
@@ -109,14 +111,14 @@ and reported software timings are outside mathematical formalization.
 - Lean `4.32.1`, compiler commit `f054605aea4b840552cca2e725580bffd1e1b704`.
 - mathlib `v4.32.1`, revision `520045ab14e26149ee970e2e617ca04b09bde5d6`;
   all nine dependency revisions match `lake-manifest.json`.
-- `lake build`: passed, 8,668 jobs. CI rebuilds every project module from source.
+- `lake build`: passed, 8,671 jobs. CI rebuilds every project module from source.
   The 86 existing warnings concern unused simp arguments, tactic style and section variables;
   there are no build errors. Pinned dependency caches are reused.
-- `python3 scripts/audit_sources.py`: passed for 16 Lean files and all thirteen
-  library modules (twelve mathematical files plus umbrella). All 12 named results
-  have ledger entries; the 51 supporting obligations have acyclic dependencies.
-- `lake env lean scripts/AxiomAudit.lean`: passed for all 450 declarations
-  originating in project modules, including 329 theorem constants and all
+- `python3 scripts/audit_sources.py`: passed for 19 Lean files and all sixteen
+  library modules (fifteen mathematical files plus umbrella). All 12 named results
+  have ledger entries; the 53 supporting obligations have acyclic dependencies.
+- `lake env lean scripts/AxiomAudit.lean`: passed for all 533 declarations
+  originating in project modules, including 399 theorem constants and all
   private/generated declarations. Every transitive axiom set is contained in
   `{propext, Classical.choice, Quot.sound}`. Current output is
   [`scripts/axiom-audit.txt`](scripts/axiom-audit.txt).
@@ -133,12 +135,12 @@ and reported software timings are outside mathematical formalization.
 
 1. Maintain passing builds, exact Python checks, source/module/ledger audits,
    transitive axiom audits, CI, and main-only protection.
-2. Complete the separate ideal/scheme certificate F10 and the appendix
-   derivative/coefficient certificates. Coordinate-algebra correspondence
-   (D03, S04–S05) is proved. The
-   exhaustive point-fiber classification F06–F09 is proved.
-3. Prove the induced three-variable bracket formula and its Casimir consequences.
-   The four-dimensional Jacobian and general symplectic criterion are proved.
+2. Complete the separate ideal/scheme certificate F10, term counts D04, and
+   announced-map/cotangent-lift claims D05–D06. Coordinate-algebra correspondence,
+   exhaustive point-fiber classification, and Appendix A certificates are proved.
+3. Close the remaining localized core and point-map factorization claims J06.
+   The induced bracket, Casimir property, source form, four-dimensional Jacobian,
+   and general symplectic criterion are proved.
 4. Higher rank construction and proof.
 5. Weyl presentation, Hamiltonian relations, actual endomorphism and
    non-surjectivity; assess PBW/model-correspondence requirements explicitly.

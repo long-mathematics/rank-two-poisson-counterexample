@@ -1,4 +1,4 @@
-Axiom audit passed: 13 modules, 450 declarations, 329 theorem constants.
+Axiom audit passed: 16 modules, 533 declarations, 399 theorem constants.
 All transitive dependencies lie in {propext, Classical.choice, Quot.sound}.
 'RankTwoPoisson.explicit_counterexample' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RankTwoPoisson.explicit_counterexample_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -26,3 +26,15 @@ All transitive dependencies lie in {propext, Classical.choice, Quot.sound}.
 'RankTwoPoisson.SourceCoordinates.corrected_det_charZero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RankTwoPoisson.Calculus.jacobi' depends on axioms: [propext, Classical.choice, Quot.sound]
 'RankTwoPoisson.Calculus.hamiltonian_commutator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Induced.source_bracket_determinant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Induced.source_casimir' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Induced.D0_R_charZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Induced.H_R_charZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Core.DerivativeCertificate.r_derivatives' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Core.DerivativeCertificate.s_derivatives' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Core.DerivativeCertificate.t_derivatives' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Core.DerivativeCertificate.h_derivatives' depends on axioms: [propext, Classical.choice, Quot.sound]
+'RankTwoPoisson.Core.DerivativeCertificate.expanded_coefficients' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'RankTwoPoisson.SourceCoordinates.Forms.omega_split_charZero' depends on axioms: [propext, Classical.choice, Quot.sound]

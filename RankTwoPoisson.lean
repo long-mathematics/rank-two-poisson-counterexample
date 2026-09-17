@@ -5,6 +5,9 @@ import RankTwoPoisson.Symplectic
 import RankTwoPoisson.CoreGeometry
 import RankTwoPoisson.SourceEquivalence
 import RankTwoPoisson.PoissonCalculus
+import RankTwoPoisson.InducedBracket
+import RankTwoPoisson.DerivativeCertificate
+import RankTwoPoisson.SourceForms
 
 /-!
 # An explicit counterexample to the rank-two Poisson conjecture
