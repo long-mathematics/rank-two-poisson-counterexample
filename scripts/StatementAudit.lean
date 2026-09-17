@@ -31,3 +31,13 @@ This supplements the whole-module axiom audit; it adds no mathematical facts. -/
 #check RankTwoPoisson.Fiber.exact_fiber_complex
 #check RankTwoPoisson.Fiber.exact_fiber_rational
 #check RankTwoPoisson.Fiber.fiber_points_distinct
+
+#print RankTwoPoisson.Symplectic.omega
+#print RankTwoPoisson.Symplectic.jacobian
+#check RankTwoPoisson.Symplectic.criterion_complex
+#check RankTwoPoisson.Symplectic.six_criterion_complex
+#check RankTwoPoisson.Symplectic.output_form_coefficients
+#check RankTwoPoisson.Symplectic.main_complex
+
+#check RankTwoPoisson.Core.core_det_charZero
+#check RankTwoPoisson.Core.coefficient_identity_matrix

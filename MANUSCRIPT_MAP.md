@@ -15,10 +15,12 @@ The exact claim/hypothesis/dependency/status ledger is
 | `RankTwoPoisson/Complex.lean` | Coefficient extension, all-polynomial complex preservation, collision, algebra-map nonautomorphism |
 | `RankTwoPoisson/CharacteristicZero.lean` | Same extension for every field K of characteristic zero, without further hypotheses |
 | `RankTwoPoisson/ExactFiber.lean` | Exhaustive three-point fiber over Q/C/K, pairwise distinctness, localized formulas, source-coordinate recovery and H-values |
+| `RankTwoPoisson/Symplectic.lean` | General symplectic criterion, actual 4×4 Jacobian and form preservation, bundled main theorem |
+| `RankTwoPoisson/CoreGeometry.lean` | Actual 3×3 core Jacobian over Q/K and complete residual form coefficient matrix |
 
-The umbrella imports `CharacteristicZero`, `Complex`, and `ExactFiber`. Their
-dependencies include `Collision` and `Poisson`; the latter imports `Core`,
-`SourceCoordinates`, and `Definitions`. This transitive
+The umbrella imports every mathematical layer, including `Symplectic` and
+`CoreGeometry`. The counterexample chain runs through `CharacteristicZero` and
+`Complex` to `Collision`, `Poisson`, `Core`, `SourceCoordinates`, and `Definitions`. This transitive
 closure is checked by `scripts/audit_sources.py`, and the root Lake library is
 the default build target. Auxiliary Lean audits live under `scripts/` and run
 explicitly after the library build.
@@ -35,5 +37,9 @@ and uses the biderivation laws; it does not depend on an unproved symplectic
 criterion. The exact fiber proof solves the core equations by polynomial combinations,
 including the x=0 case, and recovers original coordinates from the proved inverse
 certificates. It also exports the manuscript's localized formulas. The
-four-dimensional determinant, full form identity, higher ranks, and Weyl appendix
-remain distinct obligations in the ledger.
+four-dimensional determinant and full form identity are proved in `Symplectic`.
+The matrix Ω represents dx∧dp+dq∧dz, its inverse −Ω is the bracket matrix, and
+`form_entry` identifies each pulled-back coefficient with JᵀΩJ. A directly
+proved 4×4 contraction formula establishes determinant +1. `CoreGeometry`
+identifies the old expanded core determinant with Matrix.det and transports it
+coefficientwise. Higher ranks and the Weyl appendix remain open.

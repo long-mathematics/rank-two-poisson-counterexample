@@ -9,10 +9,10 @@ Christopher D. Long
 [![Build and audit Lean](https://github.com/long-mathematics/rank-two-poisson-counterexample/actions/workflows/lean-ci.yml/badge.svg)](https://github.com/long-mathematics/rank-two-poisson-counterexample/actions/workflows/lean-ci.yml)
 
 This companion repository contains the manuscript, exact computational checks,
-and the Lean formalization of the main counterexample over ℚ, ℂ, and
-arbitrary characteristic-zero fields. **Full-paper coverage is still in progress.**
-The exact three-point fiber is proved. The determinant/symplectic consequences,
-higher-rank extension, and Weyl appendix remain obligations in the
+and a Lean proof of every conclusion of the main theorem, with rational and
+arbitrary-characteristic-zero versions of its counterexample. **Full-paper coverage is still in progress.**
+The exact fiber, Jacobian determinant and symplectic preservation are proved.
+The higher-rank extension, Weyl appendix, and remaining support claims are in the
 [coverage ledger](FORMALIZATION_STATUS.md).
 
 ## Abstract
@@ -146,7 +146,13 @@ in the specified fiber is one of the three displayed points. Rational and genera
 characteristic-zero versions and pairwise distinctness are proved too. The
 separate Gröbner-basis/scheme certificate remains an obligation.
 
-[Lean CI](.github/workflows/lean-ci.yml) builds all eight mathematical modules
+`RankTwoPoisson.Symplectic.main_complex` bundles every conclusion of the main
+theorem, including the actual 4×4 Jacobian determinant and the exact fiber.
+The general symplectic criterion is proved for arbitrary polynomial outputs;
+the two-form identity is represented by its full alternating coefficient matrix
+in the manuscript coordinate order.
+
+[Lean CI](.github/workflows/lean-ci.yml) builds all ten mathematical modules
 through the default root library. It checks source escapes, import closure,
 the named-result ledger, and transitive axiom dependencies of every declaration
 originating in a project module, including private/generated constants. Only
