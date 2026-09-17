@@ -22,6 +22,8 @@ The exact claim/hypothesis/dependency/status ledger is
 | `RankTwoPoisson/DerivativeCertificate.lean` | Appendix A: all first derivatives and three expanded coefficient expressions |
 | `RankTwoPoisson/SourceForms.lean` | All source differential and two-form coefficients, including ω=dR∧dD₀+Θ |
 | `RankTwoPoisson/HigherRank.lean` | Identity extension, explicit canonical reindexing, and non-surjective Poisson endomorphisms for every n≥2 over K |
+| `RankTwoPoisson/WeylAlgebra.lean` | Universal Weyl presentation, polynomial embedding and action, and Hamiltonian commutators inside the algebra |
+| `RankTwoPoisson/WeylEndomorphism.lean` | Actual endomorphism, exact generator images and Weyl relations, and non-surjectivity via the polynomial action |
 | `RankTwoPoisson/CoreGeometry.lean` | Actual 3×3 core Jacobian over Q/K and complete residual form coefficient matrix |
 
 The umbrella imports every mathematical layer, including the source-equivalence and
@@ -48,7 +50,7 @@ The matrix Ω represents dx∧dp+dq∧dz, its inverse −Ω is the bracket matri
 `form_entry` identifies each pulled-back coefficient with JᵀΩJ. A directly
 proved 4×4 contraction formula establishes determinant +1. `CoreGeometry`
 identifies the old expanded core determinant with Matrix.det and transports it
-coefficientwise. The Weyl endomorphism remains open.
+coefficientwise.
 
 The source coordinate automorphisms are represented contravariantly by
 substitution algebra equivalences. Their inverse generator images are the
@@ -75,3 +77,25 @@ manuscript’s exact sum on 2+m pairs. The original collision extends by zeros;
 surjectivity would make the point map injective. Conjugation by the variable
 equivalence preserves this contradiction, giving non-surjectivity and hence
 nonautomorphism for every n≥2, over C and every characteristic-zero field.
+
+The fourth Weyl algebra is the free associative K-algebra on Xi and ∂i,
+quotiented by [Xi,Xj]=[∂i,∂j]=0 and [∂i,Xj]=δij. This is the manuscript's
+universal presentation. Indices 0,1,2,3 correspond to manuscript indices
+1,2,3,4, with polynomial variables (x,q,p,z). `polynomial_injective` embeds
+the coordinate polynomial algebra; `representation` gives the polynomial
+operator action. Hamiltonians are actual sums of coefficient polynomials times
+derivative generators, with coefficients (Fp,Fz,−Fx,−Fq).
+`delta_tuple` identifies their ordered images as (HD,HS,−HR,−HT), and
+`endomorphism_X`/`endomorphism_deriv` identify the actual algebra map.
+
+For non-surjectivity, `dual_intertwining` proves δi(Φg)=Φ(∂i g).
+Induction on the free algebra, followed by the quotient map, gives
+ρ(widehatΦ(a))(Φg)=Φ(ρ(a)g) for every Weyl element a and polynomial g.
+If widehatΦ were surjective, every multiplication polynomial h would be
+widehatΦ(a) for some a. Applying the identity to g=1 gives h=Φ(ρ(a)1),
+contradicting polynomial non-surjectivity proved from the explicit collision.
+This proves the same endomorphism is nonautomorphic, with the stronger
+non-surjectivity conclusion. It replaces the manuscript's highest-order-symbol
+argument without assuming operator faithfulness, PBW, or algebraic independence
+of the output polynomials. Those separate manuscript support claims remain
+explicit obligations in the ledger.

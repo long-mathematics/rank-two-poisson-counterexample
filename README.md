@@ -12,8 +12,10 @@ This companion repository contains the manuscript, exact computational checks,
 and a Lean proof of every conclusion of the main theorem, with rational and
 arbitrary-characteristic-zero versions of its counterexample. **Full-paper coverage is still in progress.**
 The exact fiber, Jacobian determinant, symplectic preservation, and extension
-to every higher Poisson rank are proved. The Weyl appendix and remaining
-support claims are tracked in the
+to every higher Poisson rank are proved, as is the actual non-surjective Weyl
+endomorphism. All 12 named results now have proofs; remaining substantive
+support claims, including the Weyl filtration and operator-model correspondence,
+are tracked in the
 [coverage ledger](FORMALIZATION_STATUS.md).
 
 ## Abstract
@@ -162,6 +164,13 @@ derivative certificates are formalized.
 `RankTwoPoisson.HigherRank.every_rank` proves non-surjective canonical Poisson
 endomorphisms for every n≥2 over every characteristic-zero field, including C.
 The standard n-pair bracket and exact generator reindexing are explicit.
+
+`RankTwoPoisson.Weyl.explicit_counterexample_complex` constructs the actual
+endomorphism of the universally presented fourth Weyl algebra and proves its
+non-surjectivity. Its generator images and every defining relation are proved
+inside that algebra. A polynomial-action argument replaces the manuscript's
+filtration proof; PBW, the filtration claims and full operator faithfulness remain
+separate obligations.
 
 [Lean CI](.github/workflows/lean-ci.yml) builds all mathematical modules
 through the default root library. It checks source escapes, import closure,
