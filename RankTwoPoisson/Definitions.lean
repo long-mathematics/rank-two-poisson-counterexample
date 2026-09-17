@@ -6,9 +6,8 @@ import Mathlib
 This file transcribes the four polynomial variables and the explicit polynomials
 from *An Explicit Counterexample to the Rank-Two Poisson Conjecture*.
 
-The coefficient field is `ℚ`.  This is enough for the displayed counterexample;
-the manuscript's extension to arbitrary characteristic-zero fields is left for a
-later base-change layer.
+The displayed polynomials have coefficients in `ℚ`. `CharacteristicZero`
+extends the construction to every field of characteristic zero.
 -/
 
 set_option maxHeartbeats 0

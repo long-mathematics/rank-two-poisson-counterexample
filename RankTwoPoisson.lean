@@ -3,6 +3,8 @@ import RankTwoPoisson.Complex
 import RankTwoPoisson.ExactFiber
 import RankTwoPoisson.Symplectic
 import RankTwoPoisson.CoreGeometry
+import RankTwoPoisson.SourceEquivalence
+import RankTwoPoisson.PoissonCalculus
 
 /-!
 # An explicit counterexample to the rank-two Poisson conjecture

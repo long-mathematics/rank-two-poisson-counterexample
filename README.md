@@ -152,7 +152,11 @@ The general symplectic criterion is proved for arbitrary polynomial outputs;
 the two-form identity is represented by its full alternating coefficient matrix
 in the manuscript coordinate order.
 
-[Lean CI](.github/workflows/lean-ci.yml) builds all ten mathematical modules
+The source-coordinate algebra equivalences, their explicit inverses and full
+Jacobians, algebraic independence of x,y,β, and the Jacobi and Hamiltonian
+commutator laws are also proved over the indicated coefficient fields.
+
+[Lean CI](.github/workflows/lean-ci.yml) builds all mathematical modules
 through the default root library. It checks source escapes, import closure,
 the named-result ledger, and transitive axiom dependencies of every declaration
 originating in a project module, including private/generated constants. Only
