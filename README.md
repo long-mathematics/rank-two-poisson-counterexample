@@ -9,14 +9,20 @@ Christopher D. Long
 [![Build and audit Lean](https://github.com/long-mathematics/rank-two-poisson-counterexample/actions/workflows/lean-ci.yml/badge.svg)](https://github.com/long-mathematics/rank-two-poisson-counterexample/actions/workflows/lean-ci.yml)
 
 This companion repository contains the manuscript, exact computational checks,
-and a Lean proof of every conclusion of the main theorem, with rational and
-arbitrary-characteristic-zero versions of its counterexample. **Full-paper coverage is still in progress.**
-The exact fiber, Jacobian determinant, symplectic preservation, and extension
-to every higher Poisson rank are proved, as is the actual non-surjective Weyl
-endomorphism. All 12 named results now have proofs; remaining substantive
-support claims, including the Weyl filtration and operator-model correspondence,
-are tracked in the
-[coverage ledger](FORMALIZATION_STATUS.md).
+and its Lean formalization. **Formalization of the paper's core claims is
+complete: every conclusion of the main theorem and all 12 named mathematical
+results have verified Lean proofs.** This includes the exhaustive three-point
+fiber, Jacobian determinant, symplectic preservation, extension to every higher
+Poisson rank, and the actual Weyl-algebra endomorphism with proved
+non-surjectivity. Rational and arbitrary-characteristic-zero versions of the
+counterexample are also proved.
+
+**The remaining formalization work concerns supporting claims.** These include
+the fiber ideal and reduced scheme, polynomial term counts and degrees, the
+cotangent lift, and Weyl PBW, filtration, and operator-model correspondence.
+Complete formalization of every mathematical claim in the paper remains open;
+the precise proved statements, alternate proof routes, and remaining obligations
+are recorded in the [coverage ledger](FORMALIZATION_STATUS.md).
 
 ## Abstract
 
